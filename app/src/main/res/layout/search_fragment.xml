@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/select_search_category"
+        android:textColor="@color/md_black_1000"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginBottom="@dimen/margin_20dp"
+        android:textSize="@dimen/text_20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_search_by_name"
+        style="@style/Button_style"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:text="@string/by_name" />
+
+    <Button
+        android:id="@+id/btn_search_by_surname"
+        style="@style/Button_style"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:text="@string/by_surname" />
+
+    <Button
+        android:id="@+id/btn_search_by_voting_card"
+        style="@style/Button_style"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:text="@string/by_election_card" />
+
+    <Button
+        android:id="@+id/btn_search_by_age"
+        style="@style/Button_style"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:text="@string/by_age" />
+
+    <Button
+        android:id="@+id/btn_search_by_address"
+        style="@style/Button_style"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:text="@string/by_address" />
+
+
+    <Button
+        android:id="@+id/btn_search_by_booth"
+        style="@style/Button_style"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:text="@string/by_booth" />
+
+</LinearLayout>

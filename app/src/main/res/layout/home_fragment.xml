@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <Button android:id="@+id/btn_search"
+        style="@style/Button_style"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_50dp"
+        android:text="@string/drawer_search" />
+</LinearLayout>

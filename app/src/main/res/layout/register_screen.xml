@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/registration"
+                android:textColor="@color/md_black_1000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="bottom"
+                android:text="@string/name"
+                android:textColor="@color/md_black_1000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                style="@style/EditText_style"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/enter_name" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="bottom"
+                android:text="@string/mobile_number"
+                android:textColor="@color/md_black_1000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                style="@style/EditText_style"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/enter_mobile_number"
+                android:inputType="number"
+                android:maxLength="10" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="bottom"
+                    android:text="@string/loksabha"
+                    android:textColor="@color/md_black_1000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    style="@style/EditText_style"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/enter_loksabha"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="bottom"
+                    android:text="@string/vidhan_sabha"
+                    android:textColor="@color/md_black_1000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    style="@style/EditText_style"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/enter_vidhan_sabha"
+                    android:inputType="number" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_ward_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="bottom"
+                    android:text="@string/ward_number"
+                    android:textColor="@color/md_black_1000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    style="@style/EditText_style"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/enter_ward_number"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_button_bg"
+                android:padding="5dp"
+                android:text="@string/submit"
+                android:textColor="@color/md_white_1000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
