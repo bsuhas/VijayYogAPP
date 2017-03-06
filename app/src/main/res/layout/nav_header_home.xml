@@ -34,6 +34,7 @@
             android:textAllCaps="false"
             android:textColor="@color/md_white_1000"
             android:textSize="@dimen/text_18sp"
+            android:text="Suhas Bachewar"
             android:textStyle="bold" />
 
         <TextView
@@ -43,7 +44,7 @@
             android:layout_gravity="left|center"
             android:layout_marginTop="@dimen/margin_10dp"
             android:singleLine="true"
-            android:text="Supervisor"
+            android:text="+918087586981"
             android:textAllCaps="false"
             android:textColor="@color/md_white_1000"
             android:textSize="@dimen/text_16sp"
