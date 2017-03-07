@@ -47,5 +47,12 @@
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/md_black_1000</item>
     </style>
+    <style name="Header_Text_style">
+        <item name="android:textSize">@dimen/text_18sp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/md_white_1000</item>
+    </style>
 
 </resources>

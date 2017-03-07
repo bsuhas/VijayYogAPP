@@ -1,14 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:orientation="vertical">
 
-    <Button android:id="@+id/btn_search"
-        style="@style/Button_style"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/margin_50dp"
-        android:text="@string/drawer_search" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nav_header_height"
+            android:background="@drawable/side_nav_bar"
+            android:orientation="horizontal">
+
+            <com.vijayyogapp.utils.CircularImageView
+                android:id="@+id/profile_image"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_gravity="left|center"
+                android:layout_margin="@dimen/margin_5dp"
+                android:src="@drawable/user"
+                app:border_color_ci="@color/md_black_1000"
+                app:shadow_ci="true"
+                app:border_ci="true"
+                app:border_width_ci="@dimen/margin_2dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:layout_marginLeft="@dimen/margin_20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_profile_name"
+                    style="@style/Header_Text_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center"
+                    android:text="Suhas Bachewar" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    style="@style/Header_Text_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:text="+91" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_10dp">
+
+            <TextView
+                style="@style/DashBoard_Text_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:layout_marginBottom="@dimen/margin_20dp"
+                android:layout_marginTop="@dimen/margin_20dp"
+                android:text="@string/information"
+                android:textColor="@color/md_red_800"
+                android:textSize="@dimen/text_24sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/DashBoard_Text_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center"
+                    android:layout_weight="0.5"
+                    android:text="@string/loksabha"
+                    android:textSize="@dimen/text_24sp" />
+
+                <TextView
+                    android:id="@+id/txt_lok_id"
+                    style="@style/DashBoard_Text_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center"
+                    android:layout_weight="0.5"
+                    android:text="1"
+                    android:textSize="@dimen/text_24sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/DashBoard_Text_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center"
+                    android:layout_weight="0.5"
+                    android:text="@string/vidhan_sabha"
+                    android:textSize="@dimen/text_24sp" />
+
+                <TextView
+                    android:id="@+id/txt_vidan_id"
+                    style="@style/DashBoard_Text_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center"
+                    android:layout_weight="0.5"
+                    android:text="1"
+                    android:textSize="@dimen/text_24sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/DashBoard_Text_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center"
+                    android:layout_weight="0.5"
+                    android:text="@string/ward_number"
+                    android:textSize="@dimen/text_24sp" />
+
+                <TextView
+                    android:id="@+id/txt_ward_id"
+                    style="@style/DashBoard_Text_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center"
+                    android:layout_weight="0.5"
+                    android:text="1"
+                    android:textSize="@dimen/text_24sp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_search"
+                style="@style/Button_style"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_50dp"
+                android:text="@string/drawer_search"
+                android:visibility="visible" />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

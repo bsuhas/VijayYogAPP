@@ -39,5 +39,12 @@
     <string name="by_election_card">मतदान ओळखपत्र नुसार</string>
     <string name="enter_here"> प्रविष्ट करा </string>
     <string name="search_result"> शोधेचा निकाल </string>
+    <string name="information">माहिती</string>
+
+    <string name="error_msg_enter_name">कृपया नाव प्रविष्ट करा </string>
+    <string name="error_msg_enter_mobile_number">कृपया योग्य मोबाईल नंबर प्रविष्ट करा </string>
+    <string name="error_msg_enter_ward_number">कृपया प्रभाग क्रमांक प्रविष्ट करा </string>
+    <string name="error_msg_enter_loksabha">कृपया लोकसभा क्रमांक प्रविष्ट करा </string>
+    <string name="error_msg_enter_vidhan_sabha">कृपया विधानसभा क्रमांक प्रविष्ट करा </string>
 
 </resources>
