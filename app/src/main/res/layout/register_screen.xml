@@ -139,7 +139,7 @@
                     android:inputType="number" />
             </LinearLayout>
 
-            <Button
+            <Button android:id="@+id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="20dp"
