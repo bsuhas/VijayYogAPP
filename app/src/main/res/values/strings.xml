@@ -46,5 +46,9 @@
     <string name="error_msg_enter_ward_number">कृपया प्रभाग क्रमांक प्रविष्ट करा </string>
     <string name="error_msg_enter_loksabha">कृपया लोकसभा क्रमांक प्रविष्ट करा </string>
     <string name="error_msg_enter_vidhan_sabha">कृपया विधानसभा क्रमांक प्रविष्ट करा </string>
+    <string name="age_limit">वय मर्यादा :</string>
+    <string name="enter_min_limit">किमान वय</string>
+    <string name="enter_max_age">कमाल वय</string>
+    <string name="to">ते</string>
 
 </resources>

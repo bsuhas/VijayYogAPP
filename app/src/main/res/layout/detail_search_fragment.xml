@@ -30,6 +30,61 @@
             android:layout_marginBottom="10dp"
             android:hint="@string/enter_here" />
 
+
+        <LinearLayout
+            android:id="@+id/ll_age_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/Header_Text_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:text="@string/age_limit"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <EditText
+                    android:id="@+id/edt_min_age"
+                    style="@style/EditText_style"
+                    android:layout_width="0dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="0.4"
+                    android:inputType="number"
+                    android:hint="@string/enter_min_limit" />
+
+                <TextView
+                    style="@style/Header_Text_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/to"
+                    android:textColor="@color/md_black_1000" />
+
+                <EditText
+                    android:id="@+id/edt_max_age"
+                    style="@style/EditText_style"
+                    android:layout_width="0dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="0.4"
+                    android:inputType="number"
+                    android:hint="@string/enter_max_age" />
+
+            </LinearLayout>
+        </LinearLayout>
+
         <Button
             android:id="@+id/btn_search"
             style="@style/Button_style"

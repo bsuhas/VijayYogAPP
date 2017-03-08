@@ -76,5 +76,6 @@ public class Constants {
     public static final String DASHBOARD_VIEW = "dashboard_view";
 
     public static final String SEARCH_FOR_TEXT = "SearchForText";
+    public static final String SEARCH_FOR_TYPE = "SearchForType";
 
 }
