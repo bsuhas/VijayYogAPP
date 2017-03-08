@@ -37,7 +37,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <EditText android:id="@+id/edt_name"
                 style="@style/EditText_style"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="10dp"
@@ -54,7 +54,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <EditText android:id="@+id/edt_mobile"
                 style="@style/EditText_style"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="10dp"
@@ -79,7 +79,7 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <EditText
+                <EditText android:id="@+id/edt_loksabha"
                     style="@style/EditText_style"
                     android:layout_width="match_parent"
                     android:layout_marginBottom="10dp"
@@ -104,7 +104,7 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <EditText
+                <EditText android:id="@+id/edt_vidhansabha"
                     style="@style/EditText_style"
                     android:layout_width="match_parent"
                     android:layout_marginBottom="10dp"
@@ -131,7 +131,7 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <EditText
+                <EditText android:id="@+id/edt_ward_number"
                     style="@style/EditText_style"
                     android:layout_width="match_parent"
                     android:layout_marginBottom="10dp"

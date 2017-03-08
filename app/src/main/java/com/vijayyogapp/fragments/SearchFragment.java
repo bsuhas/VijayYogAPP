@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
 import com.vijayyogapp.R;
 import com.vijayyogapp.HomeActivity;
 import com.vijayyogapp.utils.Constants;
@@ -18,8 +19,6 @@ import com.vijayyogapp.utils.Constants;
 
 public class SearchFragment extends Fragment implements View.OnClickListener {
     private Context mContext;
-    private CardView cvSearchByName;
-    private CardView cvSearchBySurname;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,10 +29,20 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     }
 
     private void init(View view) {
-        cvSearchByName = (CardView) view.findViewById(R.id.cv_search_by_name);
-        cvSearchBySurname = (CardView) view.findViewById(R.id.cv_search_by_surname);
+        CardView cvSearchByName = (CardView) view.findViewById(R.id.cv_search_by_name);
+        CardView cvSearchBySurname = (CardView) view.findViewById(R.id.cv_search_by_surname);
+        CardView cvSearchByVotingCard = (CardView) view.findViewById(R.id.cv_search_by_voting_card);
+
+        CardView cvSearchByAge = (CardView) view.findViewById(R.id.cv_search_by_age);
+        CardView cvSearchByAddress = (CardView) view.findViewById(R.id.cv_search_by_address);
+        CardView cvSearchByBoooth = (CardView) view.findViewById(R.id.cv_search_by_booth);
+
         cvSearchByName.setOnClickListener(this);
         cvSearchBySurname.setOnClickListener(this);
+        cvSearchByVotingCard.setOnClickListener(this);
+        cvSearchByAge.setOnClickListener(this);
+        cvSearchByAddress.setOnClickListener(this);
+        cvSearchByBoooth.setOnClickListener(this);
     }
 
     @Override
@@ -45,9 +54,26 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                 ((HomeActivity) getActivity()).setFragment(new DetailSearchFragment(), bundle);
                 break;
             case R.id.cv_search_by_surname:
-                bundle.putString(Constants.SEARCH_FOR_TEXT,getString(R.string.by_surname));
+                bundle.putString(Constants.SEARCH_FOR_TEXT, getString(R.string.by_surname));
                 ((HomeActivity) getActivity()).setFragment(new DetailSearchFragment(), bundle);
                 break;
+            case R.id.cv_search_by_voting_card:
+                bundle.putString(Constants.SEARCH_FOR_TEXT, getString(R.string.by_election_card));
+                ((HomeActivity) getActivity()).setFragment(new DetailSearchFragment(), bundle);
+                break;
+            case R.id.cv_search_by_age:
+                bundle.putString(Constants.SEARCH_FOR_TEXT, getString(R.string.by_age));
+                ((HomeActivity) getActivity()).setFragment(new DetailSearchFragment(), bundle);
+                break;
+            case R.id.cv_search_by_address:
+                bundle.putString(Constants.SEARCH_FOR_TEXT, getString(R.string.by_address));
+                ((HomeActivity) getActivity()).setFragment(new DetailSearchFragment(), bundle);
+                break;
+            case R.id.cv_search_by_booth:
+                bundle.putString(Constants.SEARCH_FOR_TEXT, getString(R.string.by_booth));
+                ((HomeActivity) getActivity()).setFragment(new DetailSearchFragment(), bundle);
+                break;
+
         }
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
     android:background="@drawable/side_nav_bar"
@@ -11,12 +12,22 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="@dimen/margin_80dp"
-        android:layout_height="@dimen/margin_80dp"
+    <!-- <ImageView
+     android:id="@+id/imageView"
+     android:layout_width="@dimen/margin_80dp"
+     android:layout_height="@dimen/margin_80dp"
+     android:layout_gravity="left|center"
+     android:src="@drawable/user" />-->
+    <com.vijayyogapp.utils.CircularImageView
+        android:id="@+id/profile_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_gravity="left|center"
-        android:src="@drawable/user" />
+        android:src="@drawable/user"
+        app:border_ci="true"
+        app:border_color_ci="@color/md_black_1000"
+        app:border_width_ci="@dimen/margin_2dp"
+        app:shadow_ci="true" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,28 +38,20 @@
 
         <TextView
             android:id="@+id/txt_profile_name"
+            style="@style/Header_Text_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"
-            android:singleLine="true"
-            android:textAllCaps="false"
-            android:textColor="@color/md_white_1000"
-            android:textSize="@dimen/text_18sp"
-            android:text="Suhas Bachewar"
-            android:textStyle="bold" />
+            android:text="Suhas Bachewar" />
 
         <TextView
             android:id="@+id/textView"
+            style="@style/Header_Text_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"
             android:layout_marginTop="@dimen/margin_10dp"
-            android:singleLine="true"
-            android:text="+918087586981"
-            android:textAllCaps="false"
-            android:textColor="@color/md_white_1000"
-            android:textSize="@dimen/text_16sp"
-            android:textStyle="bold" />
+            android:text="+918087586981" />
 
 
     </LinearLayout>

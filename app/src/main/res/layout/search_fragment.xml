@@ -2,6 +2,7 @@
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -9,269 +10,273 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_20dp"
-        android:layout_marginTop="@dimen/margin_10dp"
-        android:gravity="center"
-        android:text="@string/select_search_category"
-        android:textColor="@color/md_black_1000"
-        android:textSize="@dimen/text_20sp"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:id="@+id/ll_dashboard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:visibility="visible"
-        android:weightSum="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/cv_search_by_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_10dp"
-                android:layout_weight="0.5">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/margin_100dp"
-                        android:padding="@dimen/margin_10dp"
-                        android:src="@drawable/ic_search_by" />
-
-                    <TextView
-                        style="@style/DashBoard_Text_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/by_name" />
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/cv_search_by_surname"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_10dp"
-                android:layout_weight="0.5">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/margin_100dp"
-                        android:padding="@dimen/margin_10dp"
-                        android:src="@drawable/ic_search_by" />
-
-                    <TextView
-                        style="@style/DashBoard_Text_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/by_surname" />
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-        </LinearLayout>
-
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1" />
-
-        <!--2nd Row-->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.3"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/cv_search_by_voting_card"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_10dp"
-                android:layout_weight="0.5">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/margin_100dp"
-                        android:padding="@dimen/margin_10dp"
-                        android:src="@drawable/ic_search_by" />
-
-                    <TextView
-                        style="@style/DashBoard_Text_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/by_election_card" />
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/cv_search_by_age"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_10dp"
-                android:layout_weight="0.5">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/margin_100dp"
-                        android:padding="@dimen/margin_10dp"
-                        android:src="@drawable/ic_search_by" />
-
-                    <TextView
-                        style="@style/DashBoard_Text_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/by_age" />
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-        </LinearLayout>
-
-        <!--3rd Row-->
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_20dp"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:gravity="center"
+            android:text="@string/select_search_category"
+            android:textColor="@color/md_black_1000"
+            android:textSize="@dimen/text_20sp"
+            android:textStyle="bold" />
 
         <LinearLayout
+            android:id="@+id/ll_dashboard"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.3"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:visibility="visible"
             android:weightSum="1">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/cv_search_by_address"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_10dp"
-                android:layout_weight="0.5">
+                android:layout_weight="0.3"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_search_by_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_10dp"
+                    android:layout_weight="0.5">
 
-                    <ImageView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/margin_100dp"
-                        android:padding="@dimen/margin_10dp"
-                        android:src="@drawable/ic_search_by" />
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                    <TextView
-                        style="@style/DashBoard_Text_style"
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/margin_120dp"
+                            android:padding="@dimen/margin_10dp"
+                            android:src="@drawable/ic_search_by" />
+
+                        <TextView
+                            style="@style/DashBoard_Text_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/by_name" />
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_search_by_surname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_10dp"
+                    android:layout_weight="0.5">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/by_address" />
-                </LinearLayout>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-            </android.support.v7.widget.CardView>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/margin_120dp"
+                            android:padding="@dimen/margin_10dp"
+                            android:src="@drawable/ic_search_by" />
 
+                        <TextView
+                            style="@style/DashBoard_Text_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/by_surname" />
+                    </LinearLayout>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/cv_search_by_booth"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_10dp"
-                android:layout_weight="0.5">
+                </android.support.v7.widget.CardView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+            </LinearLayout>
 
-                    <ImageView
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.1" />
+
+            <!--2nd Row-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_search_by_voting_card"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_10dp"
+                    android:layout_weight="0.5">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/margin_100dp"
-                        android:padding="@dimen/margin_10dp"
-                        android:src="@drawable/ic_search_by" />
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                    <TextView
-                        style="@style/DashBoard_Text_style"
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/margin_120dp"
+                            android:padding="@dimen/margin_10dp"
+                            android:src="@drawable/ic_search_by" />
+
+                        <TextView
+                            style="@style/DashBoard_Text_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/by_election_card" />
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_search_by_age"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_10dp"
+                    android:layout_weight="0.5">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/by_booth" />
-                </LinearLayout>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-            </android.support.v7.widget.CardView>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/margin_120dp"
+                            android:padding="@dimen/margin_10dp"
+                            android:src="@drawable/ic_search_by" />
 
+                        <TextView
+                            style="@style/DashBoard_Text_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/by_age" />
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+            <!--3rd Row-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_search_by_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_10dp"
+                    android:layout_weight="0.5">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/margin_120dp"
+                            android:padding="@dimen/margin_10dp"
+                            android:src="@drawable/ic_search_by" />
+
+                        <TextView
+                            style="@style/DashBoard_Text_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/by_address" />
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_search_by_booth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_10dp"
+                    android:layout_weight="0.5">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/margin_120dp"
+                            android:padding="@dimen/margin_10dp"
+                            android:src="@drawable/ic_search_by" />
+
+                        <TextView
+                            style="@style/DashBoard_Text_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/by_booth" />
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
         </LinearLayout>
+        <!--<Button
+            android:id="@+id/btn_search_by_name"
+            style="@style/Button_style"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="@string/by_name" />
+
+        <Button
+            android:id="@+id/btn_search_by_surname"
+            style="@style/Button_style"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="@string/by_surname" />
+
+        <Button
+            android:id="@+id/btn_search_by_voting_card"
+            style="@style/Button_style"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="@string/by_election_card" />
+
+        <Button
+            android:id="@+id/btn_search_by_age"
+            style="@style/Button_style"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="@string/by_age" />
+
+        <Button
+            android:id="@+id/btn_search_by_address"
+            style="@style/Button_style"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="@string/by_address" />
+
+
+        <Button
+            android:id="@+id/btn_search_by_booth"
+            style="@style/Button_style"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="@string/by_booth" />
+    -->
     </LinearLayout>
-    <!--<Button
-        android:id="@+id/btn_search_by_name"
-        style="@style/Button_style"
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/margin_10dp"
-        android:text="@string/by_name" />
-
-    <Button
-        android:id="@+id/btn_search_by_surname"
-        style="@style/Button_style"
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/margin_10dp"
-        android:text="@string/by_surname" />
-
-    <Button
-        android:id="@+id/btn_search_by_voting_card"
-        style="@style/Button_style"
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/margin_10dp"
-        android:text="@string/by_election_card" />
-
-    <Button
-        android:id="@+id/btn_search_by_age"
-        style="@style/Button_style"
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/margin_10dp"
-        android:text="@string/by_age" />
-
-    <Button
-        android:id="@+id/btn_search_by_address"
-        style="@style/Button_style"
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/margin_10dp"
-        android:text="@string/by_address" />
-
-
-    <Button
-        android:id="@+id/btn_search_by_booth"
-        style="@style/Button_style"
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/margin_10dp"
-        android:text="@string/by_booth" />
--->
-</LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+</android.support.v4.widget.NestedScrollView>

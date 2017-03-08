@@ -65,7 +65,7 @@ public class Constants {
     public static final String EXTRA_IS_BARCODE_FLOW = "isBarcodeFlow";
 
     //Shared preference
-    public static final String USERNAME = "username";
+    public static final String USERDATA = "username";
     public static final String AUTHkEY = "authkey";
     public static final String KEEP_ME_LOGIN = "keepmelogin";
     public static final String CUSTOMER_CODE_API_CALLED = "customer_code_api_called";
