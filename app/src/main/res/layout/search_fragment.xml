@@ -59,6 +59,7 @@
                             style="@style/DashBoard_Text_style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/margin_10dp"
                             android:text="@string/by_name" />
                     </LinearLayout>
 
@@ -81,12 +82,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/margin_120dp"
                             android:padding="@dimen/margin_10dp"
-                            android:src="@drawable/ic_search_by" />
+                            android:src="@drawable/ic_surname" />
 
                         <TextView
                             style="@style/DashBoard_Text_style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/margin_10dp"
                             android:text="@string/by_surname" />
                     </LinearLayout>
 
@@ -124,12 +126,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/margin_120dp"
                             android:padding="@dimen/margin_10dp"
-                            android:src="@drawable/ic_search_by" />
+                            android:src="@drawable/ic_votercard" />
 
                         <TextView
                             style="@style/DashBoard_Text_style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:singleLine="false"
+                            android:paddingBottom="@dimen/margin_10dp"
                             android:text="@string/by_election_card" />
                     </LinearLayout>
 
@@ -152,12 +156,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/margin_120dp"
                             android:padding="@dimen/margin_10dp"
-                            android:src="@drawable/ic_search_by" />
+                            android:src="@drawable/ic_age" />
 
                         <TextView
                             style="@style/DashBoard_Text_style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/margin_10dp"
                             android:text="@string/by_age" />
                     </LinearLayout>
 
@@ -194,12 +199,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/margin_120dp"
                             android:padding="@dimen/margin_10dp"
-                            android:src="@drawable/ic_search_by" />
+                            android:src="@drawable/ic_address" />
 
                         <TextView
                             style="@style/DashBoard_Text_style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/margin_10dp"
                             android:text="@string/by_address" />
                     </LinearLayout>
 
@@ -222,12 +228,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/margin_120dp"
                             android:padding="@dimen/margin_10dp"
-                            android:src="@drawable/ic_search_by" />
+                            android:src="@drawable/ic_booth" />
 
                         <TextView
                             style="@style/DashBoard_Text_style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/margin_10dp"
                             android:text="@string/by_booth" />
                     </LinearLayout>
 
