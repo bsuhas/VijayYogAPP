@@ -199,7 +199,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/margin_120dp"
                             android:padding="@dimen/margin_10dp"
-                            android:src="@drawable/ic_address" />
+                            android:src="@drawable/ic_loaction" />
 
                         <TextView
                             style="@style/DashBoard_Text_style"
