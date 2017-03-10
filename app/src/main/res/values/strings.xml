@@ -50,5 +50,16 @@
     <string name="enter_min_limit">किमान वय</string>
     <string name="enter_max_age">कमाल वय</string>
     <string name="to">ते</string>
+    <string name="update_voter">Update Voter</string>
+    <string name="voter_status">Voter Status</string>
+    <string name="neutral_vote">Neutral Vote</string>
+    <string name="tentative_vote">Tentative Vote</string>
+    <string name="confirm_vote">Confirm Vote</string>
+    <string name="never_going_to_vote">Never going to Vote</string>
+    <string name="report">Report</string>
+    <string name="error_network_unavailable">Please check your internet connection and try again.</string>
+    <string name="close_the_app">Do you want to close the app?</string>
+    <string name="mem_txt_gallery">Gallery</string>
+    <string name="mem_txt_camera">Camera</string>
 
 </resources>

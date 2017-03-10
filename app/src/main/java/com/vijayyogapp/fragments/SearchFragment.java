@@ -7,10 +7,9 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.vijayyogapp.R;
-import com.vijayyogapp.HomeActivity;
+import com.vijayyogapp.activity.HomeActivity;
 import com.vijayyogapp.utils.Constants;
 
 /**

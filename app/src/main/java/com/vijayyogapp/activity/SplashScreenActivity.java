@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 
-import com.vijayyogapp.HomeActivity;
 import com.vijayyogapp.R;
+import com.vijayyogapp.database.DBHelper;
 import com.vijayyogapp.utils.UserPreferences;
 
 
@@ -22,7 +22,7 @@ public class SplashScreenActivity extends Activity {
         setContentView(R.layout.splash_screen);
         mContext = this;
         displayLandingScreen();
-//        DBHelper.getInstance(this).initDB();
+        DBHelper.getInstance(this).initDB();
     }
 
     public void displayLandingScreen() {

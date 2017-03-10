@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
+import com.vijayyogapp.R;
 import com.vijayyogapp.models.UserData;
 
 /**
@@ -91,5 +92,12 @@ public class UserPreferences {
     //check whether user is login or not
     public boolean isUserLogin() {
         return loadBoolean(Constants.KEEP_ME_LOGIN, false);
+    }
+
+    public void saveProfileImage(String path) {
+        saveString(Constants.PROFILE_IMAGE,path );
+    }
+    public String getProfileImage() {
+        return loadString(Constants.PROFILE_IMAGE,null);
     }
 }

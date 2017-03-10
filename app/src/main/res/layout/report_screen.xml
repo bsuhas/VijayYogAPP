@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_10dp"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/DashBoard_Text_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="@dimen/margin_20dp"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:text="@string/report"
+        android:textColor="@color/md_red_800"
+        android:textSize="@dimen/text_24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/margin_10dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_surname"
+            style="@style/Button_style"
+            android:layout_width="match_parent"
+            android:text="Surname" />
+
+        <Button
+            android:id="@+id/btn_netural_vote"
+            style="@style/Button_style"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="@string/neutral_vote" />
+
+        <Button
+            android:id="@+id/btn_tentative_vote"
+            style="@style/Button_style"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="@string/tentative_vote" />
+
+        <Button
+            android:id="@+id/btn_confirm_vote"
+            style="@style/Button_style"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="@string/confirm_vote" />
+
+        <Button
+            android:id="@+id/btn_never_going_to_vote"
+            style="@style/Button_style"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="@string/never_going_to_vote" />
+
+    </LinearLayout>
+
+</RelativeLayout>

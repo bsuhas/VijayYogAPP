@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
@@ -8,13 +9,12 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/margin_60dp"
         android:background="@drawable/background"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/background"
             android:orientation="vertical"
             android:padding="@dimen/margin_10dp">
@@ -33,7 +33,7 @@
                     style="@style/Voter_Label_Detail_Text_style"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Name " />
 
                 <TextView
@@ -41,7 +41,7 @@
                     style="@style/Voter_Detail_Text_style"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:text="1" />
 
             </LinearLayout>
@@ -52,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_10dp"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView
@@ -84,7 +85,7 @@
                     style="@style/Voter_Label_Detail_Text_style"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Voter Id " />
 
                 <TextView
@@ -92,37 +93,11 @@
                     style="@style/Voter_Detail_Text_style"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:text="1" />
 
             </LinearLayout>
 
-            <!--Address-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_20dp"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <TextView
-                    style="@style/Voter_Label_Detail_Text_style"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Address " />
-
-                <TextView
-                    android:id="@+id/txt_address"
-                    style="@style/Voter_Detail_Text_style"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:maxLines="4"
-                    android:singleLine="false"
-                    android:text="Rajshree business park Survey No., 338, Tadiwala Road, Sangamvadi, Plot No 114, Nr. Sohrab Hall, Pune, Maharashtra 411001" />
-
-            </LinearLayout>
 
             <!--Booth id-->
             <LinearLayout
@@ -130,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_10dp"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView
@@ -160,16 +136,16 @@
                     style="@style/Voter_Label_Detail_Text_style"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Aadhar No. " />
 
-                <TextView
-                    android:id="@+id/txt_aadhar_id"
-                    style="@style/Voter_Detail_Text_style"
+                <EditText
+                    android:id="@+id/edt_aadhar_id"
+                    style="@style/EditText_style"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="1" />
+                    android:layout_height="@dimen/margin_50dp"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Aadhar Number" />
             </LinearLayout>
 
             <!-- mobile  number -->
@@ -184,23 +160,25 @@
                     style="@style/Voter_Label_Detail_Text_style"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Mobile No. " />
 
-                <TextView
-                    android:id="@+id/txt_mobile_number"
-                    style="@style/Voter_Detail_Text_style"
+                <EditText
+                    android:id="@+id/edt_mobile_number"
+                    style="@style/EditText_style"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="1" />
+                    android:layout_height="@dimen/margin_50dp"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Mobile Number"
+                    android:inputType="number"
+                    android:maxLength="10" />
             </LinearLayout>
 
-            <!-- voter status -->
+            <!--Address-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_10dp"
+                android:layout_marginTop="@dimen/margin_20dp"
                 android:orientation="horizontal"
                 android:weightSum="1">
 
@@ -208,76 +186,31 @@
                     style="@style/Voter_Label_Detail_Text_style"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Voter Status" />
+                    android:layout_weight="0.4"
+                    android:text="Address " />
 
                 <TextView
-                    android:id="@+id/txt_voter_status"
+                    android:id="@+id/txt_address"
                     style="@style/Voter_Detail_Text_style"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
+                    android:maxLines="4"
+                    android:singleLine="false"
                     android:text="1" />
-            </LinearLayout>
 
+            </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/btn_edit"
+        style="@style/Button_style"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryDark"
-        android:visibility="visible"
-        android:weightSum="1">
-
-        <RelativeLayout
-            android:id="@+id/rl_edit_voter"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="0.5"
-            android:background="@color/colorPrimaryDark">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_weight="0.48"
-                android:drawableLeft="@drawable/ic_edit_white"
-                android:drawablePadding="@dimen/margin_10dp"
-                android:maxLines="1"
-                android:text="@string/update_voter"
-                android:textColor="@color/md_white_1000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="0.02dp"
-            android:layout_height="match_parent"
-            android:background="@color/md_white_1000" />
-
-        <RelativeLayout
-            android:id="@+id/rl_voter_status"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="0.45"
-            android:background="@color/colorPrimaryDark">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_weight="0.48"
-                android:drawableLeft="@drawable/ic_help_outline"
-                android:drawablePadding="@dimen/margin_10dp"
-                android:maxLines="1"
-                android:text="@string/voter_status"
-                android:textColor="@color/md_white_1000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-    </LinearLayout>
-
+        android:layout_margin="@dimen/margin_10dp"
+        android:text="Save Voter Details"
+        android:textAllCaps="false"
+        android:visibility="visible" />
 
 </RelativeLayout>

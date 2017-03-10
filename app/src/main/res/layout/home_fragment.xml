@@ -25,10 +25,10 @@
                 android:layout_gravity="left|center"
                 android:layout_margin="@dimen/margin_5dp"
                 android:src="@drawable/user"
-                app:border_color_ci="@color/md_black_1000"
-                app:shadow_ci="true"
                 app:border_ci="true"
-                app:border_width_ci="@dimen/margin_2dp" />
+                app:border_color_ci="@color/md_white_1000"
+                app:border_width_ci="@dimen/margin_2dp"
+                app:shadow_ci="true" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                     android:text="Suhas Bachewar" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/txt_mobile_number"
                     style="@style/Header_Text_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

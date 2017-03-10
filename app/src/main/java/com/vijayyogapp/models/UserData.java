@@ -1,46 +1,57 @@
 package com.vijayyogapp.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by SUHAS on 07/03/2017.
  */
 
 public class UserData {
-    private String name;
-    private String mobileNumber;
-    private String loaksabha;
-    private String vidhansabha;
+
+    @SerializedName("LoksabhaId")
+    @Expose
+    private String loksabhaId;
+    @SerializedName("VidhansabhaId")
+    @Expose
+    private String vidhansabhaId;
+    @SerializedName("WardNumber")
+    @Expose
     private String wardNumber;
+    @SerializedName("IMEI")
+    @Expose
+    private String iMEI;
+    @SerializedName("Username")
+    @Expose
+    private String username;
+    @SerializedName("MobileNumber")
+    @Expose
+    private String mobileNumber;
 
-    public String getName() {
-        return name;
+    private  String userId;
+
+    public String getUserId() {
+        return userId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getMobileNumber() {
-        return mobileNumber;
+    public String getLoksabhaId() {
+        return loksabhaId;
     }
 
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+    public void setLoksabhaId(String loksabhaId) {
+        this.loksabhaId = loksabhaId;
     }
 
-    public String getLoaksabha() {
-        return loaksabha;
+    public String getVidhansabhaId() {
+        return vidhansabhaId;
     }
 
-    public void setLoaksabha(String loaksabha) {
-        this.loaksabha = loaksabha;
-    }
-
-    public String getVidhansabha() {
-        return vidhansabha;
-    }
-
-    public void setVidhansabha(String vidhansabha) {
-        this.vidhansabha = vidhansabha;
+    public void setVidhansabhaId(String vidhansabhaId) {
+        this.vidhansabhaId = vidhansabhaId;
     }
 
     public String getWardNumber() {
@@ -51,14 +62,39 @@ public class UserData {
         this.wardNumber = wardNumber;
     }
 
+    public String getiMEI() {
+        return iMEI;
+    }
+
+    public void setiMEI(String iMEI) {
+        this.iMEI = iMEI;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
     @Override
     public String toString() {
         return "UserData{" +
-                "name='" + name + '\'' +
-                ", mobileNumber='" + mobileNumber + '\'' +
-                ", loaksabha='" + loaksabha + '\'' +
-                ", vidhansabha='" + vidhansabha + '\'' +
+                "loksabhaId='" + loksabhaId + '\'' +
+                ", vidhansabhaId='" + vidhansabhaId + '\'' +
                 ", wardNumber='" + wardNumber + '\'' +
+                ", iMEI='" + iMEI + '\'' +
+                ", username='" + username + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
                 '}';
     }
 }
