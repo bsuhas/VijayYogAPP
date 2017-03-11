@@ -18,17 +18,37 @@
             android:background="@drawable/side_nav_bar"
             android:orientation="horizontal">
 
-            <com.vijayyogapp.utils.CircularImageView
-                android:id="@+id/profile_image"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="left|center"
-                android:layout_margin="@dimen/margin_5dp"
-                android:src="@drawable/user"
-                app:border_ci="true"
-                app:border_color_ci="@color/md_white_1000"
-                app:border_width_ci="@dimen/margin_2dp"
-                app:shadow_ci="true" />
+                android:layout_marginLeft="@dimen/margin_20dp"
+                android:orientation="vertical">
+
+                <com.vijayyogapp.utils.CircularImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_gravity="left|center"
+                    android:layout_margin="@dimen/margin_5dp"
+                    android:src="@drawable/user"
+                    app:border_ci="true"
+                    app:border_color_ci="@color/md_white_1000"
+                    app:border_width_ci="@dimen/margin_2dp"
+                    app:shadow_ci="true" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:maxLines="2"
+                    android:singleLine="false"
+                    android:text="Tap to change"
+                    android:textColor="@color/md_white_1000"
+                    android:textSize="@dimen/text_16sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,7 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|center"
-                    android:text="Suhas Bachewar" />
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/txt_mobile_number"
@@ -56,6 +76,7 @@
             </LinearLayout>
 
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|center"
                     android:layout_weight="0.5"
-                    android:text="@string/loksabha"
+                    android:text="@string/msg_loksabha"
                     android:textSize="@dimen/text_24sp" />
 
                 <TextView
@@ -115,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|center"
                     android:layout_weight="0.5"
-                    android:text="@string/vidhan_sabha"
+                    android:text="@string/msg_vidhan_sabha"
                     android:textSize="@dimen/text_24sp" />
 
                 <TextView
@@ -143,7 +164,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|center"
                     android:layout_weight="0.5"
-                    android:text="@string/ward_number"
+                    android:text="@string/msg_ward_number"
                     android:textSize="@dimen/text_24sp" />
 
                 <TextView

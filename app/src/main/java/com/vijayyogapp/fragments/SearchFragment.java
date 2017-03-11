@@ -10,7 +10,11 @@ import android.view.ViewGroup;
 
 import com.vijayyogapp.R;
 import com.vijayyogapp.activity.HomeActivity;
+import com.vijayyogapp.database.DBHelper;
+import com.vijayyogapp.models.VoterDetailModel;
 import com.vijayyogapp.utils.Constants;
+
+import java.util.ArrayList;
 
 /**
  * Created by SUHAS on 05/03/2017.
@@ -18,6 +22,7 @@ import com.vijayyogapp.utils.Constants;
 
 public class SearchFragment extends Fragment implements View.OnClickListener {
     private Context mContext;
+    private ArrayList<VoterDetailModel> mVoterList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,11 +47,13 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         cvSearchByAge.setOnClickListener(this);
         cvSearchByAddress.setOnClickListener(this);
         cvSearchByBoooth.setOnClickListener(this);
+         mVoterList = DBHelper.getInstance(getActivity()).getAllVoters();
     }
 
     @Override
     public void onClick(View view) {
         Bundle bundle = new Bundle();
+        bundle.putSerializable(Constants.VOTER_LIST,mVoterList);
         switch (view.getId()) {
             case R.id.cv_search_by_name:
                 bundle.putString(Constants.SEARCH_FOR_TEXT, getString(R.string.by_name));

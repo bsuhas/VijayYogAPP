@@ -132,6 +132,8 @@ public class RegisterScreenActivity extends AppCompatActivity implements View.On
                         Intent intent = new Intent(RegisterScreenActivity.this, HomeActivity.class);
                         startActivity(intent);
                         finish();
+                    }else{
+                        showToast(mContext,"This user is already register, please contact to administer ");
                     }
 
                 }

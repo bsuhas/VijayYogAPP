@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.vijayyogapp.activity.HomeActivity;
 import com.vijayyogapp.R;
 import com.vijayyogapp.dialogs.PickMemoryDialog;
@@ -113,13 +116,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             try {
                 String path = getFilePath(data);
-                setImageToView(path);
 
                 File src = new File(path);
                 File dest = getImageUri();
                 copyFile(src, dest);
 
                 UserPreferences.getInstance(mContext).saveProfileImage(dest.getAbsolutePath());
+                setImageToView(path);
                 mPickMemoryDialog.dismiss();
 //                setImageToBlogDescription(getFilePath(data));
             } catch (Exception e) {
@@ -132,10 +135,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void setImageToView(String path) {
         File file = new File(path);
-        if (file.exists())
-            profileImage.setImageBitmap(Utils.getInstance().getOriententionBitmap(path));
-        else
+        if (file.exists()){
+            Uri uri = Uri.fromFile(file);
+            Picasso.with(getActivity()).load(uri).into(profileImage);
+            ((HomeActivity) getActivity()).setDrawerProfileImage();
+        }
+        else {
             profileImage.setImageResource(R.drawable.user);
+        }
     }
 
     private String getFilePath(Intent data) {

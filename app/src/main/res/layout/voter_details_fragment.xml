@@ -34,7 +34,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Name " />
+                    android:text="@string/voter_name" />
 
                 <TextView
                     android:id="@+id/txt_name"
@@ -59,7 +59,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Gender/Age " />
+                    android:text="@string/gender_age" />
 
                 <TextView
                     android:id="@+id/txt_gender_age"
@@ -85,7 +85,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Voter Id " />
+                    android:text="@string/voter_id" />
 
                 <TextView
                     android:id="@+id/txt_voter_id"
@@ -110,7 +110,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Address " />
+                    android:text="@string/voter_address" />
 
                 <TextView
                     android:id="@+id/txt_address"
@@ -137,13 +137,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Voting Booth " />
+                    android:text="@string/voting_booth" />
 
                 <TextView
                     android:id="@+id/txt_booth_id"
                     style="@style/Voter_Detail_Text_style"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:maxLines="3"
                     android:layout_weight="0.5"
                     android:text="1" />
             </LinearLayout>
@@ -161,7 +162,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Aadhar No. " />
+                    android:text="@string/adhar_number" />
 
                 <TextView
                     android:id="@+id/txt_aadhar_id"
@@ -185,7 +186,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Mobile No. " />
+                    android:text="@string/mobile_num" />
 
                 <TextView
                     android:id="@+id/txt_mobile_number"

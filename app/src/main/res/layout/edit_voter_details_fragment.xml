@@ -34,7 +34,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Name " />
+                    android:text="@string/voter_name"/>
 
                 <TextView
                     android:id="@+id/txt_name"
@@ -86,7 +86,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Voter Id " />
+                    android:text="@string/voter_id" />
 
                 <TextView
                     android:id="@+id/txt_voter_id"
@@ -137,7 +137,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Aadhar No. " />
+                    android:text="@string/adhar_number" />
 
                 <EditText
                     android:id="@+id/edt_aadhar_id"
@@ -145,7 +145,7 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/margin_50dp"
                     android:layout_weight="0.6"
-                    android:hint="Enter Aadhar Number" />
+                    android:hint="@string/enter_adhar" />
             </LinearLayout>
 
             <!-- mobile  number -->
@@ -161,7 +161,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Mobile No. " />
+                    android:text="@string/mobile_num" />
 
                 <EditText
                     android:id="@+id/edt_mobile_number"
@@ -169,7 +169,7 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/margin_50dp"
                     android:layout_weight="0.6"
-                    android:hint="Enter Mobile Number"
+                    android:hint="@string/enter_mobile_num"
                     android:inputType="number"
                     android:maxLength="10" />
             </LinearLayout>
@@ -187,7 +187,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Address " />
+                    android:text="@string/voter_address" />
 
                 <TextView
                     android:id="@+id/txt_address"
@@ -209,7 +209,7 @@
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/margin_10dp"
-        android:text="Save Voter Details"
+        android:text="@string/save_voter_detail"
         android:textAllCaps="false"
         android:visibility="visible" />
 

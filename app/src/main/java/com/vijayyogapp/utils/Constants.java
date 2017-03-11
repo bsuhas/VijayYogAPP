@@ -20,8 +20,16 @@ public class Constants {
     public static final int GALLERY_INTENT_REQUEST_CODE = 0x000005;
     public static final int CAMERA_REQUEST = 0x000003;
     public static final String PROFILE_IMAGE = "Profile_Path";
+    public static final String DEFAULT_LANG = "Profile_Path";
+    public static final String VOTER_LIST = "Voter_list";
+    public static final String VOTER_MODEL = "Voter_model";
     public static String STORED_IMAGE_PATH = "/" + "Vijay_yog";
     public static String mCurrentPhotoPath = "";
+
+
+    public static final String LANG_ENGLISH = "en";
+    public static final String LANG_HINDI = "hi";
+    public static final String LANG_MARATHI = "mr";
 
 
     //Shared preference

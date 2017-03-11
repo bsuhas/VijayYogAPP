@@ -2,6 +2,7 @@ package com.vijayyogapp.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.app.FragmentActivity;
 
 import com.google.gson.Gson;
 import com.vijayyogapp.R;
@@ -99,5 +100,12 @@ public class UserPreferences {
     }
     public String getProfileImage() {
         return loadString(Constants.PROFILE_IMAGE,null);
+    }
+
+    public String getUserDefaultLanguage() {
+        return loadString(Constants.DEFAULT_LANG,null);
+    }
+    public void setUserDefaultLanguage(String lang) {
+        saveString(Constants.DEFAULT_LANG,lang);
     }
 }

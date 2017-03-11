@@ -21,35 +21,42 @@
     <string name="vidhan_sabha">विधानसभा</string>
     <string name="enter_vidhan_sabha">विधानसभा क्रमांक प्रविष्ट करा </string>
 
-   <!--Lang Localization -->
-    <string name="drawer_home">मुख्य पान</string>
-    <string name="drawer_search">शोधा</string>
-    <string name="drawer_list">यादी</string>
-    <string name="drawer_report">अहवाल</string>
-    <string name="drawer_sync">समक्रमित</string>
-    <string name="drawer_lang">भाषा निवडा</string>
-    <string name="drawer_exit">बाहेर पडा</string>
-    <string name="drawer_more">अतिरिक्त</string>
-    <string name="by_name">नावानुसार</string>
-    <string name="by_surname">आडनांवनुसार</string>
-    <string name="select_search_category">शोध श्रेणी निवडा</string>
-    <string name="by_address">पत्तानुसार</string>
-    <string name="by_age">वयानुसार</string>
-    <string name="by_booth">बूथ नुसार</string>
-    <string name="by_election_card">मतदान ओळखपत्र नुसार</string>
-    <string name="enter_here"> प्रविष्ट करा </string>
-    <string name="search_result"> शोधेचा निकाल </string>
-    <string name="information">माहिती</string>
-
     <string name="error_msg_enter_name">कृपया नाव प्रविष्ट करा </string>
     <string name="error_msg_enter_mobile_number">कृपया योग्य मोबाईल नंबर प्रविष्ट करा </string>
     <string name="error_msg_enter_ward_number">कृपया प्रभाग क्रमांक प्रविष्ट करा </string>
     <string name="error_msg_enter_loksabha">कृपया लोकसभा क्रमांक प्रविष्ट करा </string>
     <string name="error_msg_enter_vidhan_sabha">कृपया विधानसभा क्रमांक प्रविष्ट करा </string>
-    <string name="age_limit">वय मर्यादा :</string>
-    <string name="enter_min_limit">किमान वय</string>
-    <string name="enter_max_age">कमाल वय</string>
-    <string name="to">ते</string>
+
+   <!--Lang Localization -->
+    <string name="msg_loksabha">Loksabha</string>
+    <string name="msg_vidhan_sabha">Vidhansabha</string>
+    <string name="msg_ward_number"> Ward Number</string>
+
+
+    <string name="drawer_home">Home Page</string>
+    <string name="drawer_search">Search</string>
+    <string name="drawer_list">List</string>
+    <string name="drawer_report">Report</string>
+    <string name="booth_drawer_sync">Booth Data Sync</string>
+    <string name="survey_sync">Survey Data Sync</string>
+    <string name="voter_drawer_sync">Voter Data Sync</string>
+    <string name="drawer_lang">Language Change</string>
+    <string name="drawer_exit">Exit</string>
+    <string name="drawer_more">More Options</string>
+    <string name="by_name">Search by Name</string>
+    <string name="by_surname">Search by Surname</string>
+    <string name="select_search_category">Select Search Category</string>
+    <string name="by_address">Search by Address</string>
+    <string name="by_age">Search by Age</string>
+    <string name="by_booth">Search by Booth</string>
+    <string name="by_election_card">Search by Voter Id</string>
+    <string name="enter_here"> Enter here </string>
+    <string name="search_result"> Search Result </string>
+    <string name="information">Information</string>
+    <string name="age_limit">Age Limit :</string>
+    <string name="enter_min_limit">Min Age</string>
+    <string name="enter_max_age">Max Age</string>
+    <string name="to">to</string>
     <string name="update_voter">Update Voter</string>
     <string name="voter_status">Voter Status</string>
     <string name="neutral_vote">Neutral Vote</string>
@@ -61,5 +68,21 @@
     <string name="close_the_app">Do you want to close the app?</string>
     <string name="mem_txt_gallery">Gallery</string>
     <string name="mem_txt_camera">Camera</string>
-
+    <string name="lang_english">English</string>
+    <string name="lang_marathi">मराठी</string>
+    <string name="serial_number">Serial No :</string>
+    <string name="list_number">List No :</string>
+    <string name="voter_name">Name</string>
+    <string name="gender_age">Gender/Age</string>
+    <string name="voter_address">Address</string>
+    <string name="voting_booth">Voting Booth</string>
+    <string name="adhar_number">Aadhar No.</string>
+    <string name="mobile_num">Mobile No.</string>
+    <string name="voter_id">Voter Id</string>
+    <string name="enter_adhar">Enter Aadhar Number</string>
+    <string name="enter_mobile_num">Enter Mobile Number</string>
+    <string name="save_voter_detail">Save Voter Details</string>
+    <string name="click_to_change_lang">Click here to Change Language</string>
+    <string name="selected_lang">Selected Language :</string>
+    <string name="save">Save</string>
 </resources>

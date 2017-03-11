@@ -11,6 +11,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.vijayyogapp.R;
 import com.vijayyogapp.interfaces.RetrofitRestClient;
@@ -85,6 +86,9 @@ public class Utils {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
     }
 
+    public void showToast(Context context, String string) {
+        Toast.makeText(context, string, Toast.LENGTH_SHORT).show();
+    }
     public Bitmap getOriententionBitmap(String filePath){
         Bitmap myBitmap = null;
         try

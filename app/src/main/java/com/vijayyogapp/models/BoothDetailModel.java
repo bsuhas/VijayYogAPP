@@ -1,19 +1,26 @@
 package com.vijayyogapp.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
- * Created by SUHAS on 09/03/2017.
+ * Created by SUHAS on 11/03/2017.
  */
 
 public class BoothDetailModel {
-    private int boothId;
+    @SerializedName("BID")
+    @Expose
+    private Integer bID;
+    @SerializedName("BoothAddress")
+    @Expose
     private String boothAddress;
 
-    public int getBoothId() {
-        return boothId;
+    public Integer getBID() {
+        return bID;
     }
 
-    public void setBoothId(int boothId) {
-        this.boothId = boothId;
+    public void setBID(Integer bID) {
+        this.bID = bID;
     }
 
     public String getBoothAddress() {
@@ -27,7 +34,7 @@ public class BoothDetailModel {
     @Override
     public String toString() {
         return "BoothDetailModel{" +
-                "boothId=" + boothId +
+                "bID=" + bID +
                 ", boothAddress='" + boothAddress + '\'' +
                 '}';
     }

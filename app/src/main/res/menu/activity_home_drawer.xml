@@ -19,9 +19,17 @@
             android:icon="@drawable/ic_report"
             android:title="@string/drawer_report" />
         <item
-            android:id="@+id/nav_sync"
+            android:id="@+id/nav_booth_sync"
             android:icon="@drawable/ic_sync"
-            android:title="@string/drawer_sync" />
+            android:title="@string/booth_drawer_sync" />
+        <item
+            android:id="@+id/nav_voter_sync"
+            android:icon="@drawable/ic_sync"
+            android:title="@string/voter_drawer_sync" />
+        <item
+            android:id="@+id/nav_survey_sync"
+            android:icon="@drawable/ic_sync"
+            android:title="@string/survey_sync" />
     </group>
 
     <item android:title="@string/drawer_more">

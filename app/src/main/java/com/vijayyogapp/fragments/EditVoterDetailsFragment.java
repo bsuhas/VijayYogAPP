@@ -5,6 +5,7 @@ package com.vijayyogapp.fragments;
  */
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.vijayyogapp.R;
+import com.vijayyogapp.models.VoterDetailModel;
+import com.vijayyogapp.utils.Constants;
 
 
 public class EditVoterDetailsFragment extends Fragment implements View.OnClickListener {
@@ -24,7 +27,16 @@ public class EditVoterDetailsFragment extends Fragment implements View.OnClickLi
     private TextView txtAddress;
     private TextView txtListNo;
     private TextView txtSrNo;
+    private VoterDetailModel mVoterDetailModel;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            mVoterDetailModel = (VoterDetailModel) bundle.getSerializable(Constants.VOTER_MODEL);
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,6 +55,15 @@ public class EditVoterDetailsFragment extends Fragment implements View.OnClickLi
         txtBoothId = (TextView) view.findViewById(R.id.txt_booth_id);
         txtAddress = (TextView) view.findViewById(R.id.txt_address);
         view.findViewById(R.id.btn_edit).setOnClickListener(this);
+        setDataToView();
+    }
+    private void setDataToView() {
+        txtListNo.setText(""+mVoterDetailModel.getListNo());
+        txtSrNo.setText(""+mVoterDetailModel.getSRNO());
+        txtName.setText(mVoterDetailModel.getMFULLNAME());
+        txtGenderAge.setText(mVoterDetailModel.getSEX()+"/"+mVoterDetailModel.getAge());
+        txtVoterId.setText(mVoterDetailModel.getVoterID());
+        txtAddress.setText(mVoterDetailModel.getAddress());
     }
 
     private EditText getEdtAadharId() {

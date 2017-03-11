@@ -2,9 +2,21 @@ package com.vijayyogapp.utils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
+import com.vijayyogapp.R;
+
+import java.util.Locale;
 
 public class DialogUtils {
 
@@ -43,5 +55,77 @@ public class DialogUtils {
         });
         alertDialogBuilder.setCancelable(false);
         alertDialogBuilder.create().show();
+    }
+    public static void showLanguageSelectionDialog(final Context context, final Activity activity) {
+        android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(context);
+        final View view = LayoutInflater.from(context).inflate(R.layout.language_selection_dialog, null, false);
+
+        Button btnCancel = (Button) view.findViewById(R.id.btn_cancel);
+        Button btnSubmit = (Button) view.findViewById(R.id.btn_submit);
+        final RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
+        setSelectedLangRadioBtn(context, view);
+        alertDialogBuilder.setView(view).setCancelable(false);
+        Dialog dialog = null;
+        dialog = alertDialogBuilder.show();
+
+        final Dialog finalDialog = dialog;
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+
+//                // find the radiobutton by returned id
+//                RadioButton radioSexButton = (RadioButton) view.findViewById(selectedId);
+//                Toast.makeText(context, radioSexButton.getText(), Toast.LENGTH_SHORT).show();
+
+                setLanguage(activity, selectedId);
+
+                finalDialog.dismiss();
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finalDialog.dismiss();
+            }
+        });
+    }
+    private static void setSelectedLangRadioBtn(Context context, View view) {
+        String defaultLang = UserPreferences.getInstance(context).getUserDefaultLanguage();
+        switch (defaultLang) {
+
+            case Constants.LANG_ENGLISH:
+                RadioButton radioButtonEng = (RadioButton) view.findViewById(R.id.rb_english);
+                radioButtonEng.setChecked(true);
+                break;
+            case Constants.LANG_MARATHI:
+                RadioButton radioButtonMarathi = (RadioButton) view.findViewById(R.id.rb_marathi);
+                radioButtonMarathi.setChecked(true);
+                break;
+
+        }
+    }
+    private static void setLanguage(Activity activity, int selectedId) {
+        switch (selectedId) {
+
+            case R.id.rb_english:
+                setDefaultAPPLang(activity, Constants.LANG_ENGLISH);
+                break;
+            case R.id.rb_marathi:
+                setDefaultAPPLang(activity, Constants.LANG_MARATHI);
+                break;
+        }
+
+    }
+    public static void setDefaultAPPLang(Activity activity, String lang) {
+        //Save in shared pref
+        UserPreferences.getInstance(activity).setUserDefaultLanguage(lang);
+
+        Resources res = activity.getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(lang);
+        res.updateConfiguration(conf, dm);
+        activity.recreate();
     }
 }
