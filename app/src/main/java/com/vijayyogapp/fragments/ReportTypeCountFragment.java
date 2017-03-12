@@ -41,16 +41,16 @@ public class ReportTypeCountFragment extends Fragment {
 
     private void setDataToView() {
         int neutralCount = DBHelper.getInstance(getActivity()).getStatusTypeCount(getString(R.string.neutral_vote));
-        txtNeutralVote.setText(neutralCount);
+        txtNeutralVote.setText(""+neutralCount);
 
         int tentativeCount = DBHelper.getInstance(getActivity()).getStatusTypeCount(getString(R.string.tentative_vote));
-        txtTentativeCount.setText(tentativeCount);
+        txtTentativeCount.setText(""+tentativeCount);
 
         int confirmCount = DBHelper.getInstance(getActivity()).getStatusTypeCount(getString(R.string.confirm_vote));
-        txtConfirmVoteCount.setText(confirmCount);
+        txtConfirmVoteCount.setText(""+confirmCount);
 
         int neverCount = DBHelper.getInstance(getActivity()).getStatusTypeCount(getString(R.string.never_going_to_vote));
-        txtNeverGoingToVote.setText(neverCount);
+        txtNeverGoingToVote.setText(""+neverCount);
 
 
     }

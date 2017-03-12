@@ -34,28 +34,28 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:textColor="@color/md_indigo_700"
-                android:text="@string/neutral_vote" />
+                android:text="@string/neutral_vote"
+                android:textColor="@color/md_indigo_700" />
 
             <TextView
                 android:id="@+id/txt_neutral_vote"
                 style="@style/Voter_Detail_Text_style"
                 android:layout_width="0dp"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textColor="@color/md_indigo_700"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="1" />
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/md_indigo_700"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <!--Tentative vote-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
             android:layout_marginTop="@dimen/margin_20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:weightSum="1">
 
             <TextView
@@ -63,28 +63,28 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:textColor="@color/md_yellow_700"
-                android:text="@string/tentative_vote" />
+                android:text="@string/tentative_vote"
+                android:textColor="@color/md_yellow_700" />
 
             <TextView
                 android:id="@+id/txt_tentative_count"
                 style="@style/Voter_Detail_Text_style"
                 android:layout_width="0dp"
-                android:gravity="center"
-                android:textStyle="bold"
                 android:layout_height="wrap_content"
-                android:textColor="@color/md_yellow_700"
                 android:layout_weight="0.5"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/md_yellow_700"
 
-                android:text="1" />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <!--Confirm_vote vote-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="@dimen/margin_20dp"
+            android:orientation="horizontal"
             android:weightSum="1">
 
             <TextView
@@ -92,27 +92,27 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:textColor="@color/md_green_700"
-                android:text="@string/confirm_vote" />
+                android:text="@string/confirm_vote"
+                android:textColor="@color/md_green_700" />
 
             <TextView
                 android:id="@+id/txt_confirm_vote_count"
                 style="@style/Voter_Detail_Text_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textColor="@color/md_green_700"
                 android:layout_weight="0.5"
-                android:text="1" />
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/md_green_700"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <!-- never vote -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="@dimen/margin_20dp"
+            android:orientation="horizontal"
             android:weightSum="1">
 
             <TextView
@@ -120,19 +120,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:textColor="@color/md_red_700"
-                android:text="@string/never_going_to_vote" />
+                android:text="@string/never_going_to_vote"
+                android:singleLine="false"
+                android:textColor="@color/md_red_700" />
 
             <TextView
                 android:id="@+id/txt_never_going_to_vote"
                 style="@style/Voter_Detail_Text_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/md_red_700"
-                android:textStyle="bold"
                 android:layout_weight="0.5"
-                android:text="1" />
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/md_red_700"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
