@@ -11,6 +11,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.vijayyogapp.R;
@@ -24,6 +25,8 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 /**
  * Created by SUHAS on 10/03/2017.
@@ -150,5 +153,10 @@ public class Utils {
       /*  if (resizedBitmap.getByteCount() > 31961088)
             getResizedBitmap(resizedBitmap,THUMBNAIL_SIZE, THUMBNAIL_SIZE);*/
         return resizedBitmap;
+    }
+
+    public void hidekeyboard(Activity activity){
+        InputMethodManager imm = (InputMethodManager)activity.getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

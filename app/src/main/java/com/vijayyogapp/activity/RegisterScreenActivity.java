@@ -231,6 +231,5 @@ public class RegisterScreenActivity extends AppCompatActivity implements View.On
             // permissions this app might request
         }
     }
-
 }
 

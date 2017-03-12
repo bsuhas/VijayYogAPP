@@ -6,10 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.vijayyogapp.models.BoothDetailModel;
 import com.vijayyogapp.models.VoterDetailModel;
 import com.vijayyogapp.models.VoterSurveyDetailModel;
+import com.vijayyogapp.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -190,29 +192,32 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean insertBoothData(List<BoothDetailModel> list) {
         boolean result = false;
-        for (int i=0;i<list.size();i++){
+        for (int i = 0; i < list.size(); i++) {
             result = insertBoothDetails(list.get(i));
         }
         return result;
     }
+
     public boolean insertVoterData(List<VoterDetailModel> list) {
         boolean result = false;
-        for (int i=0;i<list.size();i++){
+        for (int i = 0; i < list.size(); i++) {
             result = insertVoter(list.get(i));
         }
         return result;
     }
 
-    public boolean insertSurveyDetails(VoterSurveyDetailModel voterSurveyDetailModel) {
+    public boolean insertOrUpdateSurveyDetails(VoterSurveyDetailModel voterSurveyDetailModel, boolean isUdpdate) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-
         contentValues.put(VOTER_SURVEY_COLUMN_UNIQUE_KEY, voterSurveyDetailModel.getUniquekey());
         contentValues.put(VOTER_SURVEY_COLUMN_AADHAR_NO, voterSurveyDetailModel.getAadharNo());
         contentValues.put(VOTER_SURVEY_COLUMN_MOBILE_NO, voterSurveyDetailModel.getMobileNo());
         contentValues.put(VOTER_SURVEY_COLUMN_VOTER_STATUS, voterSurveyDetailModel.getStatus());
-
-        db.insert(BOOTH_DETAIL_TABLE_NAME, null, contentValues);
+        if (isUdpdate) {
+            db.insert(VOTER_SURVEY_DETAILS_TABLE_NAME, null, contentValues);
+        } else {
+            db.update(VOTER_SURVEY_DETAILS_TABLE_NAME, contentValues, VOTER_SURVEY_COLUMN_UNIQUE_KEY + " = ? ", new String[]{voterSurveyDetailModel.getUniquekey()});
+        }
         return true;
     }
 
@@ -223,7 +228,57 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<VoterDetailModel> containerDetailModels = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("select * from " + VOTER_DETAIL_TABLE_NAME, null);
+        Cursor cursor = db.rawQuery("select * from " + VOTER_DETAIL_TABLE_NAME  + " LIMIT 20", null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            VoterDetailModel model = getVoterDetailModel(cursor);
+
+            containerDetailModels.add(model);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return containerDetailModels;
+    }
+
+    public ArrayList<VoterDetailModel> getSearchVotersByName(String searchText, int SearchType) {
+        ArrayList<VoterDetailModel> containerDetailModels = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = null;
+        if(SearchType == Constants.BY_FNAME){
+            sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_FNAME + " like '%" + searchText + "%'";
+        }else if(SearchType == Constants.BY_LNAME){
+            sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_LNAME + " like '%" + searchText + "%'";
+        }else if(SearchType == Constants.BY_VOTERID){
+            sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_VOTER_ID + " like '%" + searchText + "%'";
+        }else if(SearchType == Constants.BY_ADDRESS){
+            sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_ADDRESS + " like '%" + searchText + "%'";
+        }else if(SearchType == Constants.BY_BOOTH){
+            sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_BOOTHID + " like '%" + searchText + "%'";
+        }
+         Log.e("SQL","getSearchVotersByName:"+sql);
+        Cursor cursor = db.rawQuery(sql, null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            VoterDetailModel model = getVoterDetailModel(cursor);
+
+            containerDetailModels.add(model);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return containerDetailModels;
+    }
+
+    public ArrayList<VoterDetailModel> getSearchVotersByAge(String minAge,String maxAge, int SearchType) {
+        ArrayList<VoterDetailModel> containerDetailModels = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = null;
+        if(SearchType == Constants.BY_AGE){
+           sql = "select * from "  + VOTER_DETAIL_TABLE_NAME + " where "+ VOTER_COLUMN_AGE +" BETWEEN '" + minAge + "' AND '" + maxAge + "' ORDER BY "+VOTER_COLUMN_AGE +" ASC";
+        }
+        Log.e("SQL","getSearchVotersByName:"+sql);
+        Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
@@ -269,6 +324,56 @@ public class DBHelper extends SQLiteOpenHelper {
         model.setBID(cursor.getInt(cursor.getColumnIndex(VOTER_COLUMN_BOOTHID)));
         model.setActive(cursor.getInt(cursor.getColumnIndex(VOTER_COLUMN_ACTIVE)));
         return model;
+    }
+
+    public String getBoothAddress(String boothId) {
+        String boothAddress = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] params = new String[]{boothId};
+        Cursor cursor = db.rawQuery("select * from " + BOOTH_DETAIL_TABLE_NAME + " where " + BOOTH_ID + " = ?", params);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            boothAddress = cursor.getString(cursor.getColumnIndex(BOOTH_COLUMN_ADDRESS));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return boothAddress;
+    }
+
+    public VoterSurveyDetailModel getSurveyData(String uniqueKey) {
+        VoterSurveyDetailModel model = new VoterSurveyDetailModel();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] params = new String[]{uniqueKey};
+        Cursor cursor = db.rawQuery("select * from " + VOTER_SURVEY_DETAILS_TABLE_NAME + " where " + VOTER_SURVEY_COLUMN_UNIQUE_KEY + " = ?", params);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                model.setUniquekey(cursor.getString(cursor.getColumnIndex(VOTER_SURVEY_COLUMN_UNIQUE_KEY)));
+                model.setAadharNo(cursor.getString(cursor.getColumnIndex(VOTER_SURVEY_COLUMN_AADHAR_NO)));
+                model.setMobileNo(cursor.getString(cursor.getColumnIndex(VOTER_SURVEY_COLUMN_MOBILE_NO)));
+                model.setStatus(cursor.getString(cursor.getColumnIndex(VOTER_SURVEY_COLUMN_VOTER_STATUS)));
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        return model;
+    }
+
+    public int getStatusTypeCount(String statusType) {
+        int count;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] params = new String[]{statusType};
+        Cursor cursor = db.rawQuery("select * from " + VOTER_SURVEY_DETAILS_TABLE_NAME + " where " + VOTER_SURVEY_COLUMN_VOTER_STATUS + " = ?", params);
+        count = cursor.getCount();
+        cursor.close();
+        return count;
+    }
+
+
+    //TODO================== Delete===============================================
+    public Integer deleteSurevey(String primarykey) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(VOTER_SURVEY_DETAILS_TABLE_NAME, VOTER_SURVEY_COLUMN_UNIQUE_KEY + " = ?", new String[]{primarykey});
     }
 
 }

@@ -103,7 +103,7 @@ public class UserPreferences {
     }
 
     public String getUserDefaultLanguage() {
-        return loadString(Constants.DEFAULT_LANG,null);
+        return loadString(Constants.DEFAULT_LANG,Constants.LANG_ENGLISH);
     }
     public void setUserDefaultLanguage(String lang) {
         saveString(Constants.DEFAULT_LANG,lang);

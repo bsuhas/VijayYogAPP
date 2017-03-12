@@ -9,8 +9,8 @@
         style="@style/DashBoard_Text_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="left|center"
         android:layout_alignParentTop="true"
+        android:layout_gravity="left|center"
         android:layout_marginBottom="@dimen/margin_20dp"
         android:layout_marginTop="@dimen/margin_20dp"
         android:text="@string/report"
@@ -34,29 +34,32 @@
             android:id="@+id/btn_netural_vote"
             style="@style/Button_style"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/margin_10dp"
-            android:text="@string/neutral_vote" />
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:text="Vote Type" />
 
         <Button
             android:id="@+id/btn_tentative_vote"
             style="@style/Button_style"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/margin_10dp"
-            android:text="@string/tentative_vote" />
+            android:text="@string/tentative_vote"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_confirm_vote"
             style="@style/Button_style"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/margin_10dp"
-            android:text="@string/confirm_vote" />
+            android:text="@string/confirm_vote"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_never_going_to_vote"
             style="@style/Button_style"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/margin_10dp"
-            android:text="@string/never_going_to_vote" />
+            android:text="@string/never_going_to_vote"
+            android:visibility="gone" />
 
     </LinearLayout>
 

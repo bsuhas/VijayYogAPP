@@ -8,24 +8,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.vijayyogapp.R;
+import com.vijayyogapp.interfaces.IDialogVoterStatus;
 
 /**
  * Created by SUHAS on 10/03/2017.
  */
 
-public class VoterStatusDialog extends Dialog {
-    private RadioButton radioNeutral;
-    private RadioButton radioTentative;
-    private RadioButton radioConfirm;
-    private RadioButton radioNever;
-    private TextView txtCancel;
+public class VoterStatusDialog extends Dialog implements View.OnClickListener {
+    private IDialogVoterStatus mIDialogVoterStatus;
+    private Context mContext;
 
-    public VoterStatusDialog(Context context) {
+    public VoterStatusDialog(Context context, IDialogVoterStatus iDailogVoterStatus) {
         super(context, R.style.MyDialogTheme);
+        mIDialogVoterStatus = iDailogVoterStatus;
+        mContext = context;
         init();
     }
 
@@ -34,16 +34,32 @@ public class VoterStatusDialog extends Dialog {
         setCanceledOnTouchOutside(false);
         this.setContentView(R.layout.status_dialog_layout);
         makeDialogLayoutSetting();
+        TextView txtCancel = (TextView) findViewById(R.id.txt_cancel);
+        txtCancel.setOnClickListener(this);
 
-        radioNeutral = (RadioButton) findViewById(R.id.radio_neutral);
-        radioTentative = (RadioButton) findViewById(R.id.radio_tentative);
-        radioConfirm = (RadioButton) findViewById(R.id.radio_confirm);
-        radioNever = (RadioButton) findViewById(R.id.radio_never);
-        txtCancel = (TextView) findViewById(R.id.txt_cancel);
-        txtCancel.setOnClickListener(new View.OnClickListener() {
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.rg_voter_status);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                dismiss();
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.radio_neutral:
+                        mIDialogVoterStatus.selectedVoterStatus(mContext.getString(R.string.neutral_vote));
+                        dismiss();
+                        break;
+                    case R.id.radio_tentative:
+                        mIDialogVoterStatus.selectedVoterStatus(mContext.getString(R.string.tentative_vote));
+                        dismiss();
+                        break;
+                    case R.id.radio_confirm:
+                        mIDialogVoterStatus.selectedVoterStatus(mContext.getString(R.string.confirm_vote));
+                        dismiss();
+                        break;
+                    case R.id.radio_never:
+                        mIDialogVoterStatus.selectedVoterStatus(mContext.getString(R.string.never_going_to_vote));
+                        dismiss();
+                        break;
+                }
+
             }
         });
     }
@@ -63,4 +79,12 @@ public class VoterStatusDialog extends Dialog {
         window.setAttributes(wlp);
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.txt_cancel:
+                dismiss();
+                break;
+        }
+    }
 }

@@ -6,9 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -16,11 +18,15 @@ import android.widget.TextView;
 
 import com.vijayyogapp.R;
 import com.vijayyogapp.adapters.VoterListAdapter;
+import com.vijayyogapp.database.DBHelper;
 import com.vijayyogapp.models.VoterDetailModel;
 import com.vijayyogapp.utils.Constants;
 import com.vijayyogapp.utils.SimpleDividerItemDecoration;
+import com.vijayyogapp.utils.Utils;
 
 import java.util.ArrayList;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 /**
  * Created by SUHAS on 05/03/2017.
@@ -31,6 +37,13 @@ public class DetailSearchFragment extends Fragment implements View.OnClickListen
     private String searchFor;
     private int searchType;
     private ArrayList<VoterDetailModel> mVoterDataList;
+    private EditText edtSearch;
+    private VoterListAdapter adapter;
+    private int searchActualType;
+    private EditText edtMinAge;
+    private EditText edtMaxAge;
+    private TextView txtNoResult;
+    private RecyclerView voterList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +52,8 @@ public class DetailSearchFragment extends Fragment implements View.OnClickListen
         if (bundle != null) {
             searchFor = bundle.getString(Constants.SEARCH_FOR_TEXT);
             searchType = bundle.getInt(Constants.SEARCH_FOR_TYPE, 1);
-            mVoterDataList =  new ArrayList<>();
+            searchActualType = bundle.getInt(Constants.SEARCH_FOR_ACTUAL_TYPE, 0);
+            mVoterDataList = new ArrayList<>();
             mVoterDataList = (ArrayList<VoterDetailModel>) bundle.getSerializable(Constants.VOTER_LIST);
         }
     }
@@ -54,11 +68,14 @@ public class DetailSearchFragment extends Fragment implements View.OnClickListen
 
     private void init(View view) {
         Button btnSearch = (Button) view.findViewById(R.id.btn_search);
-        EditText edtSearch = (EditText) view.findViewById(R.id.edt_search_by);
+        edtSearch = (EditText) view.findViewById(R.id.edt_search_by);
+        edtMinAge = (EditText) view.findViewById(R.id.edt_min_age);
+        edtMaxAge = (EditText) view.findViewById(R.id.edt_max_age);
+        txtNoResult = (TextView) view.findViewById(R.id.txt_no_result);
         TextView txtSearchType = (TextView) view.findViewById(R.id.search_type);
 
         LinearLayout llAgeSearch = (LinearLayout) view.findViewById(R.id.ll_age_search);
-        RecyclerView voterList = (RecyclerView) view.findViewById(R.id.cardList);
+         voterList = (RecyclerView) view.findViewById(R.id.cardList);
 
         LinearLayoutManager llm = new LinearLayoutManager(mContext);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -76,7 +93,7 @@ public class DetailSearchFragment extends Fragment implements View.OnClickListen
             edtSearch.setVisibility(View.VISIBLE);
         }
         btnSearch.setOnClickListener(this);
-        VoterListAdapter adapter = new VoterListAdapter(mContext,mVoterDataList);
+        adapter = new VoterListAdapter(mContext, mVoterDataList);
         voterList.setAdapter(adapter);
     }
 
@@ -84,6 +101,41 @@ public class DetailSearchFragment extends Fragment implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_search:
+                Utils.getInstance().hidekeyboard(getActivity());
+                if (searchType == 1) {
+                    String searchText = edtSearch.getText().toString().trim();
+                    if (TextUtils.isEmpty(searchText)) {
+                        Utils.getInstance().showToast(getActivity(), "Please enter to search");
+                        return;
+                    }
+                    mVoterDataList.clear();
+                    Utils.getInstance().showProgressDialog(getActivity());
+                    mVoterDataList = DBHelper.getInstance(getActivity()).getSearchVotersByName(searchText, searchActualType);
+                } else {
+                    String minAge = edtMinAge.getText().toString().trim();
+                    String maxAge = edtMaxAge.getText().toString().trim();
+                    if (TextUtils.isEmpty(minAge)) {
+                        Utils.getInstance().showToast(getActivity(), "Please enter to minimum age");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(maxAge)) {
+                        Utils.getInstance().showToast(getActivity(), "Please enter to maximum age");
+                        return;
+                    }
+                    mVoterDataList.clear();
+                    Utils.getInstance().showProgressDialog(getActivity());
+                    mVoterDataList = DBHelper.getInstance(getActivity()).getSearchVotersByAge(minAge,maxAge, searchActualType);
+                }
+                if(mVoterDataList.size()>0) {
+                    Utils.getInstance().hideProgressDialog();
+                    voterList.setVisibility(View.VISIBLE);
+                    txtNoResult.setVisibility(View.GONE);
+                    adapter.refreshAdapter(mVoterDataList);
+                }else{
+                    voterList.setVisibility(View.GONE);
+                    txtNoResult.setVisibility(View.VISIBLE);
+                    Utils.getInstance().hideProgressDialog();
+                }
                 break;
 
         }

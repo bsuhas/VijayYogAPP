@@ -6,9 +6,13 @@ package com.vijayyogapp.models;
 
 public class VoterSurveyDetailModel {
     private String uniquekey;
-    private String  aadharNo;
+    private String aadharNo;
     private String mobileNo;
     private String status;
+
+    public boolean isValid() {
+        return uniquekey != null && aadharNo != null && mobileNo != null && status != null;
+    }
 
     public String getUniquekey() {
         return uniquekey;

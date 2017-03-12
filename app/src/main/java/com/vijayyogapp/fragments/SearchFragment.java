@@ -47,7 +47,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         cvSearchByAge.setOnClickListener(this);
         cvSearchByAddress.setOnClickListener(this);
         cvSearchByBoooth.setOnClickListener(this);
-         mVoterList = DBHelper.getInstance(getActivity()).getAllVoters();
+        mVoterList = DBHelper.getInstance(getActivity()).getAllVoters();
+
     }
 
     @Override
@@ -58,31 +59,37 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
             case R.id.cv_search_by_name:
                 bundle.putString(Constants.SEARCH_FOR_TEXT, getString(R.string.by_name));
                 bundle.putInt(Constants.SEARCH_FOR_TYPE, 1);
+                bundle.putInt(Constants.SEARCH_FOR_ACTUAL_TYPE, Constants.BY_FNAME);
                 ((HomeActivity) getActivity()).setFragment(new DetailSearchFragment(), bundle);
                 break;
             case R.id.cv_search_by_surname:
                 bundle.putString(Constants.SEARCH_FOR_TEXT, getString(R.string.by_surname));
                 bundle.putInt(Constants.SEARCH_FOR_TYPE, 1);
+                bundle.putInt(Constants.SEARCH_FOR_ACTUAL_TYPE, Constants.BY_LNAME);
                 ((HomeActivity) getActivity()).setFragment(new DetailSearchFragment(), bundle);
                 break;
             case R.id.cv_search_by_voting_card:
                 bundle.putString(Constants.SEARCH_FOR_TEXT, getString(R.string.by_election_card));
                 bundle.putInt(Constants.SEARCH_FOR_TYPE, 1);
+                bundle.putInt(Constants.SEARCH_FOR_ACTUAL_TYPE, Constants.BY_VOTERID);
                 ((HomeActivity) getActivity()).setFragment(new DetailSearchFragment(), bundle);
                 break;
             case R.id.cv_search_by_age:
                 bundle.putString(Constants.SEARCH_FOR_TEXT, getString(R.string.by_age));
                 bundle.putInt(Constants.SEARCH_FOR_TYPE, 2);
+                bundle.putInt(Constants.SEARCH_FOR_ACTUAL_TYPE, Constants.BY_AGE);
                 ((HomeActivity) getActivity()).setFragment(new DetailSearchFragment(), bundle);
                 break;
             case R.id.cv_search_by_address:
                 bundle.putString(Constants.SEARCH_FOR_TEXT, getString(R.string.by_address));
                 bundle.putInt(Constants.SEARCH_FOR_TYPE, 1);
+                bundle.putInt(Constants.SEARCH_FOR_ACTUAL_TYPE, Constants.BY_ADDRESS);
                 ((HomeActivity) getActivity()).setFragment(new DetailSearchFragment(), bundle);
                 break;
             case R.id.cv_search_by_booth:
                 bundle.putString(Constants.SEARCH_FOR_TEXT, getString(R.string.by_booth));
                 bundle.putInt(Constants.SEARCH_FOR_TYPE, 1);
+                bundle.putInt(Constants.SEARCH_FOR_ACTUAL_TYPE, Constants.BY_BOOTH);
                 ((HomeActivity) getActivity()).setFragment(new DetailSearchFragment(), bundle);
                 break;
 

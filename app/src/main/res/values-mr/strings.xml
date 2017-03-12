@@ -11,7 +11,7 @@
     <string name="name">नाव</string>
     <string name="enter_name">नाव प्रविष्ट करा </string>
     <string name="mobile_number">मोबाईल नंबर </string>
-    <string name="enter_mobile_number">मोबाईल नंबर प्रविष्ट करा </string>
+    <string name="enter_mobile_number">मोबाईल क्रमांक प्रविष्ट करा </string>
     <string name="election_type">प्रकार</string>
     <string name="ward_number">प्रभाग क्रमांक</string>
     <string name="enter_ward_number">प्रभाग क्रमांक प्रविष्ट करा </string>
@@ -44,7 +44,7 @@
     <string name="by_booth">बूथ नुसार</string>
     <string name="by_election_card">मतदान ओळखपत्र नुसार</string>
     <string name="enter_here"> प्रविष्ट करा </string>
-    <string name="search_result"> शोधेचा निकाल </string>
+    <string name="search_result"> कोणतेही परिणाम आढळले नाहीत, कृपया पुन्हा प्रयत्न करा. </string>
     <string name="information">माहिती</string>
 
     <string name="error_msg_enter_name">कृपया नाव प्रविष्ट करा </string>
@@ -85,4 +85,6 @@
     <string name="click_to_change_lang"> भाषा बदला करण्यासाठी येथे क्लिक करा </string>
     <string name="selected_lang">निवडलेली भाषा :</string>
     <string name="save"> जतन करा </string>
+    <string name="msg_enter_valid_mobile_number">कृपया योग्य मोबाईल क्रमांक प्रविष्ट करा </string>
+    <string name="msg_enter_valid_aadhar_number">कृपया योग्य आधार क्रमांक प्रविष्ट करा </string>
 </resources>

@@ -39,5 +39,12 @@ public class Constants {
 
     public static final String SEARCH_FOR_TEXT = "SearchForText";
     public static final String SEARCH_FOR_TYPE = "SearchForType";
+    public static final String SEARCH_FOR_ACTUAL_TYPE = "SearchActualType";
 
+    public static final int BY_FNAME  = 901;
+    public static final int BY_LNAME  = 902;
+    public static final int BY_VOTERID  = 903;
+    public static final int BY_AGE  = 904;
+    public static final int BY_ADDRESS  = 905;
+    public static final int BY_BOOTH  = 906;
 }

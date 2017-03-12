@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vijayyogapp.R;
+import com.vijayyogapp.activity.HomeActivity;
 
 public class ReportScreenFragment extends Fragment implements View.OnClickListener {
 
@@ -26,9 +27,9 @@ public class ReportScreenFragment extends Fragment implements View.OnClickListen
 
         view.findViewById(R.id.btn_surname).setOnClickListener(this);
         view.findViewById(R.id.btn_netural_vote).setOnClickListener(this);
-        view.findViewById(R.id.btn_tentative_vote).setOnClickListener(this);
-        view.findViewById(R.id.btn_confirm_vote).setOnClickListener(this);
-        view.findViewById(R.id.btn_never_going_to_vote).setOnClickListener(this);
+//        view.findViewById(R.id.btn_tentative_vote).setOnClickListener(this);
+//        view.findViewById(R.id.btn_confirm_vote).setOnClickListener(this);
+//        view.findViewById(R.id.btn_never_going_to_vote).setOnClickListener(this);
     }
 
     @Override
@@ -39,16 +40,9 @@ public class ReportScreenFragment extends Fragment implements View.OnClickListen
                 break;
             case R.id.btn_netural_vote:
                 //TODO implement
+                ((HomeActivity) getActivity()).setFragment(new ReportTypeCountFragment(), new Bundle());
                 break;
-            case R.id.btn_tentative_vote:
-                //TODO implement
-                break;
-            case R.id.btn_confirm_vote:
-                //TODO implement
-                break;
-            case R.id.btn_never_going_to_vote:
-                //TODO implement
-                break;
+
         }
     }
 }

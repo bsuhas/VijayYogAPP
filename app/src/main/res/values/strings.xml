@@ -22,7 +22,7 @@
     <string name="enter_vidhan_sabha">विधानसभा क्रमांक प्रविष्ट करा </string>
 
     <string name="error_msg_enter_name">कृपया नाव प्रविष्ट करा </string>
-    <string name="error_msg_enter_mobile_number">कृपया योग्य मोबाईल नंबर प्रविष्ट करा </string>
+    <string name="error_msg_enter_mobile_number">कृपया योग्य मोबाईल क्रमांक प्रविष्ट करा </string>
     <string name="error_msg_enter_ward_number">कृपया प्रभाग क्रमांक प्रविष्ट करा </string>
     <string name="error_msg_enter_loksabha">कृपया लोकसभा क्रमांक प्रविष्ट करा </string>
     <string name="error_msg_enter_vidhan_sabha">कृपया विधानसभा क्रमांक प्रविष्ट करा </string>
@@ -51,7 +51,7 @@
     <string name="by_booth">Search by Booth</string>
     <string name="by_election_card">Search by Voter Id</string>
     <string name="enter_here"> Enter here </string>
-    <string name="search_result"> Search Result </string>
+    <string name="search_result"> No Result found, Please try again.</string>
     <string name="information">Information</string>
     <string name="age_limit">Age Limit :</string>
     <string name="enter_min_limit">Min Age</string>
@@ -85,4 +85,6 @@
     <string name="click_to_change_lang">Click here to Change Language</string>
     <string name="selected_lang">Selected Language :</string>
     <string name="save">Save</string>
+    <string name="msg_enter_valid_mobile_number">Please enter valid mobile number  </string>
+    <string name="msg_enter_valid_aadhar_number">Please enter valid aadhar number </string>
 </resources>

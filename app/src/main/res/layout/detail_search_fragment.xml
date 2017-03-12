@@ -94,18 +94,19 @@
             android:layout_width="match_parent"
             android:text="@string/drawer_search" />
 
-        <!-- <TextView
+         <TextView android:id="@+id/txt_no_result"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:layout_marginBottom="@dimen/margin_5dp"
              android:layout_marginTop="@dimen/margin_5dp"
              android:gravity="center"
+             android:visibility="gone"
              android:text="@string/search_result"
              android:textColor="@color/md_black_1000"
              android:textSize="@dimen/text_16sp"
              android:textStyle="bold" />
 
-         <View
+        <!-- <View
              android:layout_width="match_parent"
              android:layout_height="2dp"
              android:background="@color/md_black_1000" />-->
