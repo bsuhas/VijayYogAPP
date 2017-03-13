@@ -368,7 +368,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         return count;
     }
-
+//Select lname,COUNT(lName) from voter_detail group by voter_detail.lName;
 
     //TODO================== Delete===============================================
     public Integer deleteSurevey(String primarykey) {
