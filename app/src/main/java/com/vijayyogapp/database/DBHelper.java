@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.vijayyogapp.models.BoothDetailModel;
+import com.vijayyogapp.models.SurnameCountModel;
 import com.vijayyogapp.models.VoterDetailModel;
 import com.vijayyogapp.models.VoterSurveyDetailModel;
 import com.vijayyogapp.utils.Constants;
@@ -369,6 +370,30 @@ public class DBHelper extends SQLiteOpenHelper {
         return count;
     }
 //Select lname,COUNT(lName) from voter_detail group by voter_detail.lName;
+
+
+    public ArrayList<SurnameCountModel> getSurnameWiseCount() {
+        ArrayList<SurnameCountModel> modelArrayList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "select "+ VOTER_COLUMN_LNAME +" , COUNT( "+ VOTER_COLUMN_LNAME + " ) from " + VOTER_DETAIL_TABLE_NAME + " group by " + VOTER_COLUMN_LNAME;
+        Log.e("SurnameCountModel:",sql);
+        Cursor cursor = db.rawQuery(sql , null);
+        if (cursor.getCount() > 0) {
+            Log.e("SurnameCountModel:","CursorCount:"+cursor.getCount());
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                SurnameCountModel model =  new SurnameCountModel();
+                model.setSurname(cursor.getString(cursor.getColumnIndex(VOTER_COLUMN_LNAME)));
+//                model.setSurname(cursor.getString(cursor.getColumnIndex("lName")));
+//                model.setCount(cursor.getInt(cursor.getColumnIndex("COUNT( lName )")));
+                Log.e("SurnameCountModel",model.toString());
+                modelArrayList.add(model);
+            }
+        }
+        cursor.close();
+        return modelArrayList;
+    }
+
 
     //TODO================== Delete===============================================
     public Integer deleteSurevey(String primarykey) {

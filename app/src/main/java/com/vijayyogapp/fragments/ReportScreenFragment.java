@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.vijayyogapp.R;
 import com.vijayyogapp.activity.HomeActivity;
+import com.vijayyogapp.database.DBHelper;
 
 public class ReportScreenFragment extends Fragment implements View.OnClickListener {
 
@@ -37,6 +38,7 @@ public class ReportScreenFragment extends Fragment implements View.OnClickListen
         switch (view.getId()) {
             case R.id.btn_surname:
                 //TODO implement
+                DBHelper.getInstance(getActivity()).getSurnameWiseCount();
                 break;
             case R.id.btn_netural_vote:
                 //TODO implement
