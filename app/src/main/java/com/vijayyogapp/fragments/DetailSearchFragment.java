@@ -1,7 +1,10 @@
 package com.vijayyogapp.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +13,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -25,8 +27,6 @@ import com.vijayyogapp.utils.SimpleDividerItemDecoration;
 import com.vijayyogapp.utils.Utils;
 
 import java.util.ArrayList;
-
-import static android.content.Context.INPUT_METHOD_SERVICE;
 
 /**
  * Created by SUHAS on 05/03/2017.
@@ -44,6 +44,7 @@ public class DetailSearchFragment extends Fragment implements View.OnClickListen
     private EditText edtMaxAge;
     private TextView txtNoResult;
     private RecyclerView voterList;
+    private ProgressDialog pd;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,7 +76,7 @@ public class DetailSearchFragment extends Fragment implements View.OnClickListen
         TextView txtSearchType = (TextView) view.findViewById(R.id.search_type);
 
         LinearLayout llAgeSearch = (LinearLayout) view.findViewById(R.id.ll_age_search);
-         voterList = (RecyclerView) view.findViewById(R.id.cardList);
+        voterList = (RecyclerView) view.findViewById(R.id.cardList);
 
         LinearLayoutManager llm = new LinearLayoutManager(mContext);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -109,8 +110,7 @@ public class DetailSearchFragment extends Fragment implements View.OnClickListen
                         return;
                     }
                     mVoterDataList.clear();
-                    Utils.getInstance().showProgressDialog(getActivity());
-                    mVoterDataList = DBHelper.getInstance(getActivity()).getSearchVotersByName(searchText, searchActualType);
+                    showProgressDialog(searchText);
                 } else {
                     String minAge = edtMinAge.getText().toString().trim();
                     String maxAge = edtMaxAge.getText().toString().trim();
@@ -123,22 +123,56 @@ public class DetailSearchFragment extends Fragment implements View.OnClickListen
                         return;
                     }
                     mVoterDataList.clear();
-                    Utils.getInstance().showProgressDialog(getActivity());
-                    mVoterDataList = DBHelper.getInstance(getActivity()).getSearchVotersByAge(minAge,maxAge, searchActualType);
-                }
-                if(mVoterDataList.size()>0) {
-                    Utils.getInstance().hideProgressDialog();
-                    voterList.setVisibility(View.VISIBLE);
-                    txtNoResult.setVisibility(View.GONE);
-                    adapter.refreshAdapter(mVoterDataList);
-                }else{
-                    voterList.setVisibility(View.GONE);
-                    txtNoResult.setVisibility(View.VISIBLE);
-                    Utils.getInstance().hideProgressDialog();
+                    showProgressDialogForAge(minAge, maxAge);
                 }
                 break;
 
         }
     }
+
+    private void showProgressDialog(final String searchText) {
+        pd = ProgressDialog.show(getActivity(), "", "Please wait....");
+        new Thread() {
+            public void run() {
+                try {
+                    mVoterDataList = DBHelper.getInstance(getActivity()).getSearchVotersByName(searchText, searchActualType);
+                    handler.sendEmptyMessage(0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    private void showProgressDialogForAge(final String minAge, final String maxAge) {
+        pd = ProgressDialog.show(getActivity(), "", "Please wait....");
+        new Thread() {
+            public void run() {
+                try {
+                    mVoterDataList = DBHelper.getInstance(getActivity()).getSearchVotersByAge(minAge, maxAge, searchActualType);
+                    handler.sendEmptyMessage(0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            pd.dismiss();
+            if (mVoterDataList.size() > 0) {
+                Utils.getInstance().hideProgressDialog();
+                voterList.setVisibility(View.VISIBLE);
+                txtNoResult.setVisibility(View.GONE);
+                adapter.refreshAdapter(mVoterDataList);
+            } else {
+                voterList.setVisibility(View.GONE);
+                txtNoResult.setVisibility(View.VISIBLE);
+            }
+        }
+    };
 }
+
 

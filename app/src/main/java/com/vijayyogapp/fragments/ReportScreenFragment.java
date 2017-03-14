@@ -38,7 +38,7 @@ public class ReportScreenFragment extends Fragment implements View.OnClickListen
         switch (view.getId()) {
             case R.id.btn_surname:
                 //TODO implement
-                DBHelper.getInstance(getActivity()).getSurnameWiseCount();
+                ((HomeActivity) getActivity()).setFragment(new SurnameWiseReportFragment(), new Bundle());
                 break;
             case R.id.btn_netural_vote:
                 //TODO implement

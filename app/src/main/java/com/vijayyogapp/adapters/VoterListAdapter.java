@@ -1,11 +1,8 @@
 package com.vijayyogapp.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +14,6 @@ import com.vijayyogapp.activity.HomeActivity;
 import com.vijayyogapp.fragments.VoterDetailsFragment;
 import com.vijayyogapp.models.VoterDetailModel;
 import com.vijayyogapp.utils.Constants;
-import com.vijayyogapp.utils.Utils;
 
 import java.util.List;
 

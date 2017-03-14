@@ -229,7 +229,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<VoterDetailModel> containerDetailModels = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("select * from " + VOTER_DETAIL_TABLE_NAME  + " LIMIT 20", null);
+        Cursor cursor = db.rawQuery("select * from " + VOTER_DETAIL_TABLE_NAME + " LIMIT 20", null);
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
@@ -246,18 +246,18 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<VoterDetailModel> containerDetailModels = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String sql = null;
-        if(SearchType == Constants.BY_FNAME){
+        if (SearchType == Constants.BY_FNAME) {
             sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_FNAME + " like '%" + searchText + "%'";
-        }else if(SearchType == Constants.BY_LNAME){
+        } else if (SearchType == Constants.BY_LNAME) {
             sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_LNAME + " like '%" + searchText + "%'";
-        }else if(SearchType == Constants.BY_VOTERID){
+        } else if (SearchType == Constants.BY_VOTERID) {
             sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_VOTER_ID + " like '%" + searchText + "%'";
-        }else if(SearchType == Constants.BY_ADDRESS){
+        } else if (SearchType == Constants.BY_ADDRESS) {
             sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_ADDRESS + " like '%" + searchText + "%'";
-        }else if(SearchType == Constants.BY_BOOTH){
+        } else if (SearchType == Constants.BY_BOOTH) {
             sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_BOOTHID + " like '%" + searchText + "%'";
         }
-         Log.e("SQL","getSearchVotersByName:"+sql);
+        Log.e("SQL", "getSearchVotersByName:" + sql);
         Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
 
@@ -271,14 +271,14 @@ public class DBHelper extends SQLiteOpenHelper {
         return containerDetailModels;
     }
 
-    public ArrayList<VoterDetailModel> getSearchVotersByAge(String minAge,String maxAge, int SearchType) {
+    public ArrayList<VoterDetailModel> getSearchVotersByAge(String minAge, String maxAge, int SearchType) {
         ArrayList<VoterDetailModel> containerDetailModels = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String sql = null;
-        if(SearchType == Constants.BY_AGE){
-           sql = "select * from "  + VOTER_DETAIL_TABLE_NAME + " where "+ VOTER_COLUMN_AGE +" BETWEEN '" + minAge + "' AND '" + maxAge + "' ORDER BY "+VOTER_COLUMN_AGE +" ASC";
+        if (SearchType == Constants.BY_AGE) {
+            sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_AGE + " BETWEEN '" + minAge + "' AND '" + maxAge + "' ORDER BY " + VOTER_COLUMN_AGE + " ASC";
         }
-        Log.e("SQL","getSearchVotersByName:"+sql);
+        Log.e("SQL", "getSearchVotersByName:" + sql);
         Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
 
@@ -369,25 +369,21 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         return count;
     }
-//Select lname,COUNT(lName) from voter_detail group by voter_detail.lName;
-
 
     public ArrayList<SurnameCountModel> getSurnameWiseCount() {
         ArrayList<SurnameCountModel> modelArrayList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "select "+ VOTER_COLUMN_LNAME +" , COUNT( "+ VOTER_COLUMN_LNAME + " ) from " + VOTER_DETAIL_TABLE_NAME + " group by " + VOTER_COLUMN_LNAME;
-        Log.e("SurnameCountModel:",sql);
-        Cursor cursor = db.rawQuery(sql , null);
+        String sql = "select " + VOTER_COLUMN_LNAME + " , COUNT( " + VOTER_COLUMN_LNAME + " ) as count from " + VOTER_DETAIL_TABLE_NAME + " group by " + VOTER_COLUMN_LNAME;
+        Log.e("SurnameCountModel:", sql);
+        Cursor cursor = db.rawQuery(sql, null);
         if (cursor.getCount() > 0) {
-            Log.e("SurnameCountModel:","CursorCount:"+cursor.getCount());
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                SurnameCountModel model =  new SurnameCountModel();
+                SurnameCountModel model = new SurnameCountModel();
                 model.setSurname(cursor.getString(cursor.getColumnIndex(VOTER_COLUMN_LNAME)));
-//                model.setSurname(cursor.getString(cursor.getColumnIndex("lName")));
-//                model.setCount(cursor.getInt(cursor.getColumnIndex("COUNT( lName )")));
-                Log.e("SurnameCountModel",model.toString());
+                model.setCount(cursor.getInt(cursor.getColumnIndex("count")));
                 modelArrayList.add(model);
+                cursor.moveToNext();
             }
         }
         cursor.close();
