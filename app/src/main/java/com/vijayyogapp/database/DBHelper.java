@@ -397,4 +397,14 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.delete(VOTER_SURVEY_DETAILS_TABLE_NAME, VOTER_SURVEY_COLUMN_UNIQUE_KEY + " = ?", new String[]{primarykey});
     }
 
+    public Integer deleteVoterData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(VOTER_DETAIL_TABLE_NAME, null, null);
+    }
+
+    public Integer deleteBoothData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(BOOTH_DETAIL_TABLE_NAME, null, null);
+    }
+
 }

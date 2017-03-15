@@ -9,6 +9,7 @@ import android.app.Activity;
 
 import com.google.gson.Gson;
 import com.vijayyogapp.interfaces.RESTClientResponse;
+import com.vijayyogapp.models.VoterDataRequestModel;
 import com.vijayyogapp.models.VoterDataResponseModel;
 import com.vijayyogapp.models.RequestModel;
 import com.vijayyogapp.utils.Utils;
@@ -22,7 +23,7 @@ import retrofit2.Response;
  */
 public class VoterDataService {
 
-    public void getVoterData(final Activity activity, RequestModel requestModel, final RESTClientResponse restClientResponse) {
+    public void getVoterData(final Activity activity, VoterDataRequestModel requestModel, final RESTClientResponse restClientResponse) {
 
         Call<VoterDataResponseModel> call = Utils.getInstance().getRestClient().getVoterData(requestModel);
         call.enqueue(new Callback<VoterDataResponseModel>() {

@@ -4,6 +4,7 @@ import com.vijayyogapp.models.BoothDataResponse;
 import com.vijayyogapp.models.RegisterResponseModel;
 import com.vijayyogapp.models.RequestModel;
 import com.vijayyogapp.models.UserData;
+import com.vijayyogapp.models.VoterDataRequestModel;
 import com.vijayyogapp.models.VoterDataResponseModel;
 
 import retrofit2.Call;
@@ -26,5 +27,5 @@ public interface RetrofitRestClient {
 
     @Headers("Content-Type: application/json")
     @POST("VoterData")
-    Call<VoterDataResponseModel> getVoterData(@Body RequestModel model);
+    Call<VoterDataResponseModel> getVoterData(@Body VoterDataRequestModel model);
 }

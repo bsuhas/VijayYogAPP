@@ -1,5 +1,8 @@
 package com.vijayyogapp.activity;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -34,6 +37,7 @@ import com.vijayyogapp.models.BoothDataResponse;
 import com.vijayyogapp.models.RequestModel;
 import com.vijayyogapp.models.StatusModel;
 import com.vijayyogapp.models.UserData;
+import com.vijayyogapp.models.VoterDataRequestModel;
 import com.vijayyogapp.models.VoterDataResponseModel;
 import com.vijayyogapp.utils.CircularImageView;
 import com.vijayyogapp.utils.DialogUtils;
@@ -49,6 +53,9 @@ public class HomeActivity extends AppCompatActivity
     private UserData mUserData;
     private SystemBarTintManager mTintManager;
     private CircularImageView profileImage;
+    private int startID = 0;
+    private int endId = 0;
+    private boolean showProgress = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,9 +167,10 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_report) {
             setFragment(new ReportScreenFragment(), bundle);
         } else if (id == R.id.nav_booth_sync) {
+            DBHelper.getInstance(this).deleteBoothData();
             getBoothData();
         } else if (id == R.id.nav_voter_sync) {
-            getVoterData();
+          showYesNoDialog(HomeActivity.this,"Alert"," Data Sync required 10 -15 minute time so do not kill App");
         } else if (id == R.id.nav_survey_sync) {
 
         } else if (id == R.id.nav_lang) {
@@ -181,21 +189,40 @@ public class HomeActivity extends AppCompatActivity
 
     //Get Voter List
     private void getVoterData() {
-        Utils.getInstance().showProgressDialog(this);
-        RequestModel requestModel = getRequestModel();
+        if(showProgress)
+             Utils.getInstance().showProgressDialog(this);
+
+        VoterDataRequestModel requestModel = getVoterDataRequestModel(startID ,endId);
 
         new VoterDataService().getVoterData(this, requestModel, new RESTClientResponse() {
             @Override
             public void onSuccess(Object response, int statusCode) {
                 if (statusCode == 200) {
-                    Utils.getInstance().hideProgressDialog();
+
                     VoterDataResponseModel model = (VoterDataResponseModel) response;
                     Log.e("TAG", "VoterData Response:" + model.toString());
                     StatusModel statusModel = model.getStatus().get(0);
                     if (statusModel.getErrorcode() == 1) {
                         boolean result = DBHelper.getInstance(HomeActivity.this).insertVoterData(model.getVoterData());
-                        if (result)
-                        Utils.getInstance().showToast(HomeActivity.this, "Data Saved Successfully");
+                        if (result) {
+//
+                            int listSize = model.getVoterData().size();
+                            if(listSize < 500){
+                                showProgress = true;
+                                Utils.getInstance().hideProgressDialog();
+                                Utils.getInstance().showToast(HomeActivity.this, "Total "+ (startID + listSize)+" voter data Saved Successfully");
+                            }else {
+                                showProgress = false;
+                                if(startID == 0)//StartID = 0 + 500 + 1 = 501 (First Time)
+                                      startID = startID + listSize + 1; //501
+                                else // 501+499 = 1000(from 2 time)
+                                    startID = startID + listSize ;
+
+                                endId = startID +499; //1000
+
+                                getVoterData();
+                            }
+                        }
                         else
                             Utils.getInstance().showToast(HomeActivity.this, "Something went wrong, please try again.");
                     } else {
@@ -258,6 +285,18 @@ public class HomeActivity extends AppCompatActivity
         return model;
     }
 
+    private VoterDataRequestModel getVoterDataRequestModel(int start, int end) {
+        VoterDataRequestModel model = new VoterDataRequestModel();
+        model.setVidhansabhaId(mUserData.getVidhansabhaId());
+        model.setLoksabhaId(mUserData.getLoksabhaId());
+        model.setWardNumber(mUserData.getWardNumber());
+        model.setUserID(mUserData.getUserId());
+        model.setStartID(""+start);
+        model.setEndID(""+end);
+        Log.e("TAG", "RequestModel:" + model.toString());
+        return model;
+    }
+
     public void setFragment(Fragment fragment, Bundle bundle) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction =
@@ -271,5 +310,31 @@ public class HomeActivity extends AppCompatActivity
     public UserData getUserData() {
         return mUserData;
     }
+    public void showYesNoDialog(final Activity mActivity, String title, String msg) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mActivity);
+        if (title != null)
+            alertDialogBuilder.setTitle(title);
+        alertDialogBuilder.setMessage(msg);
+        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                dialog.dismiss();
+                callWebServiceFromMenu(mActivity);
+            }
+        });
+        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        alertDialogBuilder.setCancelable(false);
+        alertDialogBuilder.create().show();
+    }
 
+    private void callWebServiceFromMenu(Activity mActivity) {
+        int result = DBHelper.getInstance(mActivity).deleteVoterData();
+        Log.e("result","Result: "+result);
+        getVoterData();
+    }
 }
