@@ -47,4 +47,5 @@ public class Constants {
     public static final int BY_AGE  = 904;
     public static final int BY_ADDRESS  = 905;
     public static final int BY_BOOTH  = 906;
+    public static int KEYBOARD_TYPE = 2;
 }

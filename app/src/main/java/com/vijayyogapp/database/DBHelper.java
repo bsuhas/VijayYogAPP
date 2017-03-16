@@ -247,9 +247,15 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String sql = null;
         if (SearchType == Constants.BY_FNAME) {
-            sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_FNAME + " like '%" + searchText + "%'";
+            if (Constants.KEYBOARD_TYPE == 1) //Marathi
+                sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_MFNAME + " like '%" + searchText + "%'";
+            else
+                sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_FNAME + " like '%" + searchText + "%'";
         } else if (SearchType == Constants.BY_LNAME) {
-            sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_LNAME + " like '%" + searchText + "%'";
+            if (Constants.KEYBOARD_TYPE == 1) //Marathi
+                sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_MLNAME + " like '%" + searchText + "%'";
+            else
+                sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_LNAME + " like '%" + searchText + "%'";
         } else if (SearchType == Constants.BY_VOTERID) {
             sql = "select * from " + VOTER_DETAIL_TABLE_NAME + " where " + VOTER_COLUMN_VOTER_ID + " like '%" + searchText + "%'";
         } else if (SearchType == Constants.BY_ADDRESS) {

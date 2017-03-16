@@ -88,6 +88,46 @@
             </LinearLayout>
         </LinearLayout>
 
+        <LinearLayout android:id="@+id/ll_keyboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_5dp"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/rg_keyboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <RadioButton
+                    android:id="@+id/radio_marathi"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/margin_50dp"
+                    android:layout_weight="0.5"
+                    android:padding="@dimen/margin_10dp"
+                    android:text="@string/lang_marathi"
+                    android:textColor="@color/md_black_1000"
+                    android:textSize="@dimen/text_18sp"
+                    android:theme="@style/MyRadioButton" />
+
+                <RadioButton
+                    android:id="@+id/radio_english"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/margin_50dp"
+                    android:layout_weight="0.5"
+                    android:padding="@dimen/margin_10dp"
+                    android:text="@string/lang_english"
+                    android:checked="true"
+                    android:textColor="@color/md_black_1000"
+                    android:textSize="@dimen/text_18sp"
+                    android:theme="@style/MyRadioButton" />
+            </RadioGroup>
+
+
+        </LinearLayout>
+
         <Button
             android:id="@+id/btn_search"
             style="@style/Button_style"

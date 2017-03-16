@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.vijayyogapp.R;
@@ -45,6 +46,7 @@ public class DetailSearchFragment extends Fragment implements View.OnClickListen
     private TextView txtNoResult;
     private RecyclerView voterList;
     private ProgressDialog pd;
+    private LinearLayout llKeyboard;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,6 +75,7 @@ public class DetailSearchFragment extends Fragment implements View.OnClickListen
         edtMinAge = (EditText) view.findViewById(R.id.edt_min_age);
         edtMaxAge = (EditText) view.findViewById(R.id.edt_max_age);
         txtNoResult = (TextView) view.findViewById(R.id.txt_no_result);
+        llKeyboard = (LinearLayout) view.findViewById(R.id.ll_keyboard);
         TextView txtSearchType = (TextView) view.findViewById(R.id.search_type);
 
         LinearLayout llAgeSearch = (LinearLayout) view.findViewById(R.id.ll_age_search);
@@ -96,6 +99,28 @@ public class DetailSearchFragment extends Fragment implements View.OnClickListen
         btnSearch.setOnClickListener(this);
         adapter = new VoterListAdapter(mContext, mVoterDataList);
         voterList.setAdapter(adapter);
+
+        if (searchActualType == Constants.BY_FNAME || searchActualType == Constants.BY_LNAME) {
+            llKeyboard.setVisibility(View.VISIBLE);
+        } else {
+            llKeyboard.setVisibility(View.GONE);
+        }
+
+        RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.rg_keyboard);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.radio_marathi:
+                        Constants.KEYBOARD_TYPE = 1;
+                        break;
+                    case R.id.radio_english:
+                        Constants.KEYBOARD_TYPE = 2;
+                        break;
+                }
+
+            }
+        });
     }
 
     @Override
