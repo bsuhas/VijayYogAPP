@@ -2,11 +2,14 @@ package com.vijayyogapp.utils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Application;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.vijayyogapp.MyApplication;
 import com.vijayyogapp.R;
 
 import java.util.Locale;
@@ -128,4 +132,18 @@ public class DialogUtils {
         res.updateConfiguration(conf, dm);
         activity.recreate();
     }
+
+    public static void updateConfig(Application app,String lang) {
+        Resources res = app.getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+
+        if( Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            //Wrapping the configuration to avoid Activity endless loop
+//           loop Configuration config = new Configuration(res.getConfiguration());
+            conf.locale = new Locale(lang);
+            res.updateConfiguration(conf, res.getDisplayMetrics());
+        }
+    }
+
 }

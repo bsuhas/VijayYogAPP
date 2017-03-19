@@ -379,7 +379,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<SurnameCountModel> getSurnameWiseCount() {
         ArrayList<SurnameCountModel> modelArrayList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "select " + VOTER_COLUMN_LNAME + " , COUNT( " + VOTER_COLUMN_LNAME + " ) as count from " + VOTER_DETAIL_TABLE_NAME + " group by " + VOTER_COLUMN_LNAME;
+        String sql = "select " + VOTER_COLUMN_LNAME + " , COUNT( " + VOTER_COLUMN_LNAME + " ) as count from " + VOTER_DETAIL_TABLE_NAME + " group by " + VOTER_COLUMN_LNAME + " ORDER BY " + 2 + " DESC;" ;
         Log.e("SurnameCountModel:", sql);
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor.getCount() > 0) {

@@ -65,7 +65,6 @@ public class HomeActivity extends AppCompatActivity
         initToolBar();
         Bundle bundle = new Bundle();
         setFragment(new HomeFragment(), bundle);
-
     }
 
     private void initToolBar() {
@@ -210,7 +209,8 @@ public class HomeActivity extends AppCompatActivity
                             if(listSize < 500){
                                 showProgress = true;
                                 Utils.getInstance().hideProgressDialog();
-                                Utils.getInstance().showToast(HomeActivity.this, "Total "+ (startID + listSize)+" voter data Saved Successfully");
+//                                Utils.getInstance().showToast(HomeActivity.this, "Total "+ (startID + listSize)+" voter data Saved Successfully");
+                                DialogUtils.showAlertDialog(HomeActivity.this,"Alert","Total "+ (startID + listSize)+" voter data Saved Successfully");
                             }else {
                                 showProgress = false;
                                 if(startID == 0)//StartID = 0 + 500 + 1 = 501 (First Time)
