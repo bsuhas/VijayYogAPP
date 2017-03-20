@@ -366,7 +366,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return model;
     }
 
-    public int getStatusTypeCount(String statusType) {
+    public long getStatusTypeCount(String statusType) {
         int count;
         SQLiteDatabase db = this.getReadableDatabase();
         String[] params = new String[]{statusType};
@@ -376,6 +376,14 @@ public class DBHelper extends SQLiteOpenHelper {
         return count;
     }
 
+    public long getTotalVoterCount() {
+        int count;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from " + VOTER_DETAIL_TABLE_NAME , null);
+        count = cursor.getCount();
+        cursor.close();
+        return count;
+    }
     public ArrayList<SurnameCountModel> getSurnameWiseCount() {
         ArrayList<SurnameCountModel> modelArrayList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();

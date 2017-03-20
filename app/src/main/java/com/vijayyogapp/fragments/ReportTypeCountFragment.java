@@ -5,6 +5,7 @@ package com.vijayyogapp.fragments;
  */
 
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ public class ReportTypeCountFragment extends Fragment {
     private TextView txtTentativeCount;
     private TextView txtConfirmVoteCount;
     private TextView txtNeverGoingToVote;
+    private TextView txtVoteCount;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,6 +33,7 @@ public class ReportTypeCountFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        txtVoteCount = (TextView) view.findViewById(R.id.txt_vote_count);
         txtNeutralVote = (TextView) view.findViewById(R.id.txt_neutral_vote);
         txtTentativeCount = (TextView) view.findViewById(R.id.txt_tentative_count);
         txtConfirmVoteCount = (TextView) view.findViewById(R.id.txt_confirm_vote_count);
@@ -40,17 +43,21 @@ public class ReportTypeCountFragment extends Fragment {
     }
 
     private void setDataToView() {
-        int neutralCount = DBHelper.getInstance(getActivity()).getStatusTypeCount(getString(R.string.neutral_vote));
-        txtNeutralVote.setText(""+neutralCount);
+        long totalVoterCount = DBHelper.getInstance(getActivity()).getTotalVoterCount();
+        Log.e("voterCount","VoterCount:"+totalVoterCount);
+        txtVoteCount.setText("" + totalVoterCount);
 
-        int tentativeCount = DBHelper.getInstance(getActivity()).getStatusTypeCount(getString(R.string.tentative_vote));
-        txtTentativeCount.setText(""+tentativeCount);
+        long tentativeCount = DBHelper.getInstance(getActivity()).getStatusTypeCount(getString(R.string.tentative_vote));
+        txtTentativeCount.setText("" + tentativeCount);
 
-        int confirmCount = DBHelper.getInstance(getActivity()).getStatusTypeCount(getString(R.string.confirm_vote));
-        txtConfirmVoteCount.setText(""+confirmCount);
+        long confirmCount = DBHelper.getInstance(getActivity()).getStatusTypeCount(getString(R.string.confirm_vote));
+        txtConfirmVoteCount.setText("" + confirmCount);
 
-        int neverCount = DBHelper.getInstance(getActivity()).getStatusTypeCount(getString(R.string.never_going_to_vote));
-        txtNeverGoingToVote.setText(""+neverCount);
+        long neverCount = DBHelper.getInstance(getActivity()).getStatusTypeCount(getString(R.string.never_going_to_vote));
+        txtNeverGoingToVote.setText("" + neverCount);
+
+        long neutralCount = totalVoterCount - (tentativeCount + confirmCount + neverCount);
+        txtNeutralVote.setText("" + neutralCount);
 
 
     }
