@@ -11,9 +11,10 @@ import java.io.Serializable;
 
 public class VoterDetailModel implements Serializable{
 
+    private Integer iD;
     @SerializedName("ID")
     @Expose
-    private Integer iD;
+    private Integer recordID;
     @SerializedName("PrimaryKey")
     @Expose
     private String primaryKey;
@@ -276,10 +277,19 @@ public class VoterDetailModel implements Serializable{
         this.active = active;
     }
 
+    public Integer getRecordID() {
+        return recordID;
+    }
+
+    public void setRecordID(Integer recordID) {
+        this.recordID = recordID;
+    }
+
     @Override
     public String toString() {
         return "VoterDetailModel{" +
                 "iD=" + iD +
+                ", recordID=" + recordID +
                 ", primaryKey='" + primaryKey + '\'' +
                 ", loksabhaId=" + loksabhaId +
                 ", vidhansabhaId=" + vidhansabhaId +

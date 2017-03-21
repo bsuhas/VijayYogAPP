@@ -213,8 +213,10 @@ public class HomeActivity extends AppCompatActivity
                                 DialogUtils.showAlertDialog(HomeActivity.this,"Alert","Total "+ (startID + listSize)+" voter data Saved Successfully");
                             }else {
                                 showProgress = false;
-                                if(startID == 0)//StartID = 0 + 500 + 1 = 501 (First Time)
-                                      startID = startID + listSize + 1; //501
+                                if(startID == 0) {//StartID = 0 + 500 + 1 = 501 (First Time)
+                                    startID = DBHelper.getInstance(HomeActivity.this).getLastInsertedVoterID();
+                                    startID = startID + listSize + 1; //501
+                                }
                                 else // 501+499 = 1000(from 2 time)
                                     startID = startID + listSize ;
 

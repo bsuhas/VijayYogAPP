@@ -26,6 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //VOTER_DETAIL_TABLE_NAME
     public static final String VOTER_COLUMN_ID = "Id";
+    public static final String VOTER_COLUMN_RECORD_ID = "RecordId";
     public static final String VOTER_COLUMN_UNIQUE_KEY = "Uniquekey";
     public static final String VOTER_COLUMN_LOKSABHA_ID = "LoksabhaId";
     public static final String VOTER_COLUMN_VIDHANSABHA_ID = "VidhansabhaId";
@@ -87,6 +88,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String VOTER_DETAIL_TABLE = "CREATE TABLE " + VOTER_DETAIL_TABLE_NAME + "("
                 + VOTER_COLUMN_ID + " INTEGER PRIMARY KEY,"
+                + VOTER_COLUMN_RECORD_ID + " INTEGER,"
                 + VOTER_COLUMN_UNIQUE_KEY + " TEXT,"
                 + VOTER_COLUMN_LOKSABHA_ID + " TEXT,"
                 + VOTER_COLUMN_VIDHANSABHA_ID + " TEXT,"
@@ -147,6 +149,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
+        contentValues.put(VOTER_COLUMN_RECORD_ID, detailModel.getRecordID());
         contentValues.put(VOTER_COLUMN_UNIQUE_KEY, detailModel.getPrimaryKey());
         contentValues.put(VOTER_COLUMN_VIDHANSABHA_ID, detailModel.getVidhansabhaId());
         contentValues.put(VOTER_COLUMN_LOKSABHA_ID, detailModel.getLoksabhaId());
@@ -302,6 +305,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private VoterDetailModel getVoterDetailModel(Cursor cursor) {
         VoterDetailModel model = new VoterDetailModel();
 
+        model.setRecordID(cursor.getInt(cursor.getColumnIndex(VOTER_COLUMN_RECORD_ID)));
         model.setPrimaryKey(cursor.getString(cursor.getColumnIndex(VOTER_COLUMN_UNIQUE_KEY)));
         model.setLoksabhaId(cursor.getInt(cursor.getColumnIndex(VOTER_COLUMN_LOKSABHA_ID)));
         model.setVidhansabhaId(cursor.getInt(cursor.getColumnIndex(VOTER_COLUMN_VIDHANSABHA_ID)));
@@ -372,6 +376,20 @@ public class DBHelper extends SQLiteOpenHelper {
         String[] params = new String[]{statusType};
         Cursor cursor = db.rawQuery("select * from " + VOTER_SURVEY_DETAILS_TABLE_NAME + " where " + VOTER_SURVEY_COLUMN_VOTER_STATUS + " = ?", params);
         count = cursor.getCount();
+        cursor.close();
+        return count;
+    }
+    public int getLastInsertedVoterID() {
+        int count = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "select "+ VOTER_COLUMN_RECORD_ID +" from " + VOTER_DETAIL_TABLE_NAME  + " ORDER BY "+ VOTER_COLUMN_RECORD_ID + " DESC LIMIT 1";
+        Log.e("sql",sql);
+        Cursor cursor = db.rawQuery(sql, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            count = cursor.getInt(cursor.getColumnIndex(VOTER_COLUMN_RECORD_ID));
+        }
+//        count = cursor.getCount();
         cursor.close();
         return count;
     }
