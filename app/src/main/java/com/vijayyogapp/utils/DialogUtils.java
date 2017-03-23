@@ -2,14 +2,11 @@ package com.vijayyogapp.utils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Application;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +14,6 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.vijayyogapp.MyApplication;
 import com.vijayyogapp.R;
 
 import java.util.Locale;
@@ -60,6 +56,7 @@ public class DialogUtils {
         alertDialogBuilder.setCancelable(false);
         alertDialogBuilder.create().show();
     }
+
     public static void showLanguageSelectionDialog(final Context context, final Activity activity) {
         android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(context);
         final View view = LayoutInflater.from(context).inflate(R.layout.language_selection_dialog, null, false);
@@ -94,6 +91,7 @@ public class DialogUtils {
             }
         });
     }
+
     private static void setSelectedLangRadioBtn(Context context, View view) {
         String defaultLang = UserPreferences.getInstance(context).getUserDefaultLanguage();
         switch (defaultLang) {
@@ -109,6 +107,7 @@ public class DialogUtils {
 
         }
     }
+
     private static void setLanguage(Activity activity, int selectedId) {
         switch (selectedId) {
 
@@ -121,6 +120,7 @@ public class DialogUtils {
         }
 
     }
+
     public static void setDefaultAPPLang(Activity activity, String lang) {
         //Save in shared pref
         UserPreferences.getInstance(activity).setUserDefaultLanguage(lang);
@@ -133,17 +133,20 @@ public class DialogUtils {
         activity.recreate();
     }
 
-    public static void updateConfig(Application app,String lang) {
-        Resources res = app.getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        android.content.res.Configuration conf = res.getConfiguration();
+    @SuppressWarnings("deprecation")
+    public static Context updateResourcesLegacy(Context context, String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
 
-        if( Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            //Wrapping the configuration to avoid Activity endless loop
-//           loop Configuration config = new Configuration(res.getConfiguration());
-            conf.locale = new Locale(lang);
-            res.updateConfiguration(conf, res.getDisplayMetrics());
-        }
+        Resources resources = context.getResources();
+
+        Configuration configuration = resources.getConfiguration();
+        configuration.locale = locale;
+
+        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+
+        return context;
     }
+
 
 }

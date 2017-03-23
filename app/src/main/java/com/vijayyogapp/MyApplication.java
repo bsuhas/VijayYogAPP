@@ -17,6 +17,6 @@ public class MyApplication extends Application {
         super.onCreate();
         Stetho.initializeWithDefaults(this);
         String lang = UserPreferences.getInstance(this).getUserDefaultLanguage();
-        DialogUtils.updateConfig(MyApplication.this, lang);
+        DialogUtils.updateResourcesLegacy(getApplicationContext(), lang);
     }
 }
