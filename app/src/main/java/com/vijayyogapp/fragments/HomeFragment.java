@@ -132,12 +132,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         if (requestCode == Constants.CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             String compressedPath = CameraUtils.compressImage(Constants.mCurrentPhotoPath, getActivity());
             if (isProfileImage) {
-                setImageToView(compressedPath);
                 UserPreferences.getInstance(mContext).saveProfileImage(compressedPath);
+                setImageToView(compressedPath);
                 mPickMemoryDialog.dismiss();
             } else {
-                setPartyLogo(compressedPath);
                 UserPreferences.getInstance(mContext).savePartyLogoImage(compressedPath);
+                setPartyLogo(compressedPath);
                 mPickMemoryDialog.dismiss();
             }
 
