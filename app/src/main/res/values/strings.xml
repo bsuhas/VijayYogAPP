@@ -87,4 +87,5 @@
     <string name="save">Save</string>
     <string name="msg_enter_valid_mobile_number">Please enter valid mobile number  </string>
     <string name="msg_enter_valid_aadhar_number">Please enter valid aadhar number </string>
+    <string name="change_party_logo">Click here to change the party logo</string>
 </resources>

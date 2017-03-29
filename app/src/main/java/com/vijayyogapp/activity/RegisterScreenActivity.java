@@ -181,32 +181,18 @@ public class RegisterScreenActivity extends AppCompatActivity implements View.On
 
     private void checkPermission() {
         // Here, mContext is the current activity
-        if (ContextCompat.checkSelfPermission(mContext,
-                Manifest.permission.READ_PHONE_STATE)
+        if (ContextCompat.checkSelfPermission(mContext,Manifest.permission.READ_PHONE_STATE)
                 != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(RegisterScreenActivity.this,
                     Manifest.permission.READ_PHONE_STATE)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
             } else {
-
-                // No explanation needed, we can request the permission.
-
                 ActivityCompat.requestPermissions(RegisterScreenActivity.this,
                         new String[]{Manifest.permission.READ_PHONE_STATE},
                         MY_PERMISSIONS_REQUEST_READ_PHONE_STATE);
-
-                // MY_PERMISSIONS_REQUEST_READ_PHONE_STATE is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
             }
         }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode,

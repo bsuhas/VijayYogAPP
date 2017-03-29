@@ -1,13 +1,16 @@
 package com.vijayyogapp.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -56,7 +59,7 @@ public class HomeActivity extends AppCompatActivity
     private int startID = 0;
     private int endId = 0;
     private boolean showProgress = true;
-
+    private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 201;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +68,7 @@ public class HomeActivity extends AppCompatActivity
         initToolBar();
         Bundle bundle = new Bundle();
         setFragment(new HomeFragment(), bundle);
+        checkPermissionForWrite();
     }
 
     private void initToolBar() {
@@ -100,9 +104,7 @@ public class HomeActivity extends AppCompatActivity
         } else {
             File file = new File(profileImg);
             if (file.exists()) {
-                Uri uri = Uri.fromFile(file);
-                Picasso.with(HomeActivity.this).load(uri).into(profileImage);
-//                profileImage.setImageBitmap(Utils.getInstance().getOriententionBitmap(profileImg));
+                Picasso.with(HomeActivity.this).load("file:///"+file.getAbsolutePath()).placeholder(R.drawable.user).into(profileImage);
             } else
                 profileImage.setImageResource(R.drawable.user);
         }
@@ -340,4 +342,36 @@ public class HomeActivity extends AppCompatActivity
         Log.e("result","Result: "+result);
         getVoterData();
     }
+    private void checkPermissionForWrite() {
+        // Here, mContext is the current activity
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(HomeActivity.this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            } else {
+                ActivityCompat.requestPermissions(HomeActivity.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+            }
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+               case MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+        }
+    }
+
 }

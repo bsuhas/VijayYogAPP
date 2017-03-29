@@ -3,9 +3,11 @@ package com.vijayyogapp.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -22,6 +26,7 @@ import com.vijayyogapp.activity.HomeActivity;
 import com.vijayyogapp.R;
 import com.vijayyogapp.dialogs.PickMemoryDialog;
 import com.vijayyogapp.models.UserData;
+import com.vijayyogapp.utils.CameraUtils;
 import com.vijayyogapp.utils.CircularImageView;
 import com.vijayyogapp.utils.Constants;
 import com.vijayyogapp.utils.UserPreferences;
@@ -45,7 +50,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private TextView txtLokId;
     private TextView txtVidanId;
     private TextView txtWardId;
+//    private TextView txtChangePartyLogo;
+    private LinearLayout llCoverPhoto;
     private PickMemoryDialog mPickMemoryDialog;
+    private boolean isProfileImage = true;
+    private ImageView imgPartyLogo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,12 +71,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         txtLokId = (TextView) view.findViewById(R.id.txt_lok_id);
         txtVidanId = (TextView) view.findViewById(R.id.txt_vidan_id);
         txtWardId = (TextView) view.findViewById(R.id.txt_ward_id);
+//        txtChangePartyLogo = (TextView) view.findViewById(R.id.txt_change_party_logo);
+        llCoverPhoto = (LinearLayout) view.findViewById(R.id.ll_cover_photo);
+        imgPartyLogo = (ImageView) view.findViewById(R.id.img_party_logo);
 
         setDataToView();
 
         Button btnSearch = (Button) view.findViewById(R.id.btn_search);
         btnSearch.setOnClickListener(this);
         profileImage.setOnClickListener(this);
+        imgPartyLogo.setOnClickListener(this);
     }
 
     private void setDataToView() {
@@ -85,6 +98,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         } else {
             setImageToView(profileImg);
         }
+        String partyImg = UserPreferences.getInstance(mContext).getPartyLogoImage();
+        if (partyImg != null) {
+            setPartyLogo(partyImg);
+        }else{
+            imgPartyLogo.setImageResource(R.drawable.party_logo);
+        }
     }
 
     @Override
@@ -95,6 +114,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 ((HomeActivity) getActivity()).setFragment(new SearchFragment(), bundle);
                 break;
             case R.id.profile_image:
+                isProfileImage = true;
+                mPickMemoryDialog = new PickMemoryDialog(getActivity(), HomeFragment.this);
+                mPickMemoryDialog.show();
+                break;
+            case R.id.img_party_logo:
+                isProfileImage = false;
                 mPickMemoryDialog = new PickMemoryDialog(getActivity(), HomeFragment.this);
                 mPickMemoryDialog.show();
                 break;
@@ -105,10 +130,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //Image from Camera
         if (requestCode == Constants.CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-
-            setImageToView(Constants.mCurrentPhotoPath);
-            UserPreferences.getInstance(mContext).saveProfileImage(Constants.mCurrentPhotoPath);
-            mPickMemoryDialog.dismiss();
+            String compressedPath = CameraUtils.compressImage(Constants.mCurrentPhotoPath, getActivity());
+            if (isProfileImage) {
+                setImageToView(compressedPath);
+                UserPreferences.getInstance(mContext).saveProfileImage(compressedPath);
+                mPickMemoryDialog.dismiss();
+            } else {
+                setPartyLogo(compressedPath);
+                UserPreferences.getInstance(mContext).savePartyLogoImage(compressedPath);
+                mPickMemoryDialog.dismiss();
+            }
 
         }
         //Image from Gallery
@@ -116,14 +147,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             try {
                 String path = getFilePath(data);
-
-                File src = new File(path);
+                String compressedPath = CameraUtils.compressImage(path, getActivity());
+                File src = new File(compressedPath);
                 File dest = getImageUri();
                 copyFile(src, dest);
 
-                UserPreferences.getInstance(mContext).saveProfileImage(dest.getAbsolutePath());
-                setImageToView(path);
-                mPickMemoryDialog.dismiss();
+                if (isProfileImage) {
+                    UserPreferences.getInstance(mContext).saveProfileImage(dest.getAbsolutePath());
+                    setImageToView(compressedPath);
+                    mPickMemoryDialog.dismiss();
+                } else {
+                    setPartyLogo(compressedPath);
+                    UserPreferences.getInstance(mContext).savePartyLogoImage(compressedPath);
+                    mPickMemoryDialog.dismiss();
+                }
 //                setImageToBlogDescription(getFilePath(data));
             } catch (Exception e) {
                 e.printStackTrace();
@@ -135,13 +172,24 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void setImageToView(String path) {
         File file = new File(path);
-        if (file.exists()){
-            Uri uri = Uri.fromFile(file);
-            Picasso.with(getActivity()).load(uri).into(profileImage);
+        if (file.exists()) {
+            Picasso.with(getActivity()).load("file:///" + file.getAbsolutePath()).placeholder(R.drawable.user).into(profileImage);
             ((HomeActivity) getActivity()).setDrawerProfileImage();
-        }
-        else {
+        } else {
             profileImage.setImageResource(R.drawable.user);
+        }
+    }
+
+    private void setPartyLogo(String path) {
+        File file = new File(path);
+        if (file.exists()) {
+            Picasso.with(getActivity()).load("file:///"+file.getAbsolutePath()).into(imgPartyLogo);
+            /*Resources res = getResources();
+            Bitmap bitmap = BitmapFactory.decodeFile(path);
+            BitmapDrawable bd = new BitmapDrawable(res, bitmap);
+            llCoverPhoto.setBackgroundDrawable(bd);*/
+        }else{
+            imgPartyLogo.setImageResource(R.drawable.party_logo);
         }
     }
 

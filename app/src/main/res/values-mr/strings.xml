@@ -87,4 +87,5 @@
     <string name="save"> जतन करा </string>
     <string name="msg_enter_valid_mobile_number">कृपया योग्य मोबाईल क्रमांक प्रविष्ट करा </string>
     <string name="msg_enter_valid_aadhar_number">कृपया योग्य आधार क्रमांक प्रविष्ट करा </string>
+    <string name="change_party_logo">पक्ष चिन्ह बदलण्यासाठी येथे क्लिक करा</string>
 </resources>

@@ -108,4 +108,11 @@ public class UserPreferences {
     public void setUserDefaultLanguage(String lang) {
         saveString(Constants.DEFAULT_LANG,lang);
     }
+
+    public void savePartyLogoImage(String path) {
+        saveString(Constants.PARTY_LOGO_IMAGE,path );
+    }
+    public String getPartyLogoImage() {
+        return loadString(Constants.PARTY_LOGO_IMAGE,null);
+    }
 }
