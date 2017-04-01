@@ -3,6 +3,8 @@ package com.vijayyogapp.interfaces;
 import com.vijayyogapp.models.BoothDataResponse;
 import com.vijayyogapp.models.RegisterResponseModel;
 import com.vijayyogapp.models.RequestModel;
+import com.vijayyogapp.models.SurveyDataRequestModel;
+import com.vijayyogapp.models.SurveyDataResponse;
 import com.vijayyogapp.models.UserData;
 import com.vijayyogapp.models.VoterDataRequestModel;
 import com.vijayyogapp.models.VoterDataResponseModel;
@@ -28,4 +30,8 @@ public interface RetrofitRestClient {
     @Headers("Content-Type: application/json")
     @POST("VoterData")
     Call<VoterDataResponseModel> getVoterData(@Body VoterDataRequestModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("SurveyData")
+    Call<SurveyDataResponse> getSurveyData(@Body SurveyDataRequestModel model);
 }

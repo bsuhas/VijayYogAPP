@@ -2,6 +2,7 @@ package com.vijayyogapp.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,9 +11,12 @@ import android.util.Log;
 
 import com.vijayyogapp.models.BoothDetailModel;
 import com.vijayyogapp.models.SurnameCountModel;
+import com.vijayyogapp.models.SurveyDataRequestModel;
+import com.vijayyogapp.models.UserData;
 import com.vijayyogapp.models.VoterDetailModel;
 import com.vijayyogapp.models.VoterSurveyDetailModel;
 import com.vijayyogapp.utils.Constants;
+import com.vijayyogapp.utils.UserPreferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -369,7 +373,30 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         return model;
     }
+    public ArrayList<SurveyDataRequestModel> getSurveyDataList(UserData userData) {
+        ArrayList<SurveyDataRequestModel> modelList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from " + VOTER_SURVEY_DETAILS_TABLE_NAME , null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                SurveyDataRequestModel model = new SurveyDataRequestModel();
+                model.setPrimaryKey(cursor.getString(cursor.getColumnIndex(VOTER_SURVEY_COLUMN_UNIQUE_KEY)));
+                model.setAadharno(cursor.getString(cursor.getColumnIndex(VOTER_SURVEY_COLUMN_AADHAR_NO)));
+                model.setMobileno(cursor.getString(cursor.getColumnIndex(VOTER_SURVEY_COLUMN_MOBILE_NO)));
+                model.setVoterstatus(cursor.getString(cursor.getColumnIndex(VOTER_SURVEY_COLUMN_VOTER_STATUS)));
 
+                model.setUserID(userData.getUserId());
+                model.setVidhansabhaId(userData.getVidhansabhaId());
+                model.setLoksabhaId(userData.getLoksabhaId());
+                model.setWardNumber(userData.getWardNumber());
+                modelList.add(model);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        return modelList;
+    }
     public long getStatusTypeCount(String statusType) {
         int count;
         SQLiteDatabase db = this.getReadableDatabase();

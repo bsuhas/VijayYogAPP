@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -34,22 +33,27 @@ import com.vijayyogapp.fragments.HomeFragment;
 import com.vijayyogapp.fragments.ReportScreenFragment;
 import com.vijayyogapp.fragments.SearchFragment;
 import com.vijayyogapp.fragments.SettingsFragment;
-import com.vijayyogapp.fragments.VoterDetailsFragment;
 import com.vijayyogapp.interfaces.RESTClientResponse;
 import com.vijayyogapp.models.BoothDataResponse;
 import com.vijayyogapp.models.RequestModel;
 import com.vijayyogapp.models.StatusModel;
+import com.vijayyogapp.models.SurveyDataRequestModel;
+import com.vijayyogapp.models.SurveyDataResponse;
+import com.vijayyogapp.models.SurveyStatusModel;
 import com.vijayyogapp.models.UserData;
 import com.vijayyogapp.models.VoterDataRequestModel;
 import com.vijayyogapp.models.VoterDataResponseModel;
+import com.vijayyogapp.models.VoterSurveyDetailModel;
 import com.vijayyogapp.utils.CircularImageView;
 import com.vijayyogapp.utils.DialogUtils;
 import com.vijayyogapp.utils.UserPreferences;
 import com.vijayyogapp.utils.Utils;
 import com.vijayyogapp.webservices.BoothDataService;
+import com.vijayyogapp.webservices.SurveyDataService;
 import com.vijayyogapp.webservices.VoterDataService;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -60,6 +64,9 @@ public class HomeActivity extends AppCompatActivity
     private int endId = 0;
     private boolean showProgress = true;
     private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 201;
+    private int surveyDataCount = 0;
+    private ArrayList<SurveyDataRequestModel> surveyReqDataModelList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,7 +111,7 @@ public class HomeActivity extends AppCompatActivity
         } else {
             File file = new File(profileImg);
             if (file.exists()) {
-                Picasso.with(HomeActivity.this).load("file:///"+file.getAbsolutePath()).placeholder(R.drawable.user).into(profileImage);
+                Picasso.with(HomeActivity.this).load("file:///" + file.getAbsolutePath()).placeholder(R.drawable.user).into(profileImage);
             } else
                 profileImage.setImageResource(R.drawable.user);
         }
@@ -171,8 +178,17 @@ public class HomeActivity extends AppCompatActivity
             DBHelper.getInstance(this).deleteBoothData();
             getBoothData();
         } else if (id == R.id.nav_voter_sync) {
-          showYesNoDialog(HomeActivity.this,"Alert"," Data Sync required 10 -15 minute time so do not kill App");
+            showYesNoDialog(HomeActivity.this, "Alert", " Data Sync required 10 -15 minute time so do not kill App");
         } else if (id == R.id.nav_survey_sync) {
+            UserData userData = UserPreferences.getInstance(this).getUserNameInfo();
+            surveyReqDataModelList = DBHelper.getInstance(this).getSurveyDataList(userData);
+            if (surveyReqDataModelList.size() > 0) {
+                surveyDataCount = 0;
+                showProgress = true;
+                sendSurveyData(surveyReqDataModelList.get(surveyDataCount));
+            } else {
+                Utils.getInstance().showToast(HomeActivity.this, "No survey data available to sync");
+            }
 
         } else if (id == R.id.nav_lang) {
             setFragment(new SettingsFragment(), bundle);
@@ -184,16 +200,55 @@ public class HomeActivity extends AppCompatActivity
         return true;
     }
 
+    private void sendSurveyData(SurveyDataRequestModel reqModel) {
+        if (showProgress)
+            Utils.getInstance().showProgressDialog(this);
+        Log.e("SurveyReqModel", reqModel.toString());
+        new SurveyDataService().getSurveyData(this, reqModel, new RESTClientResponse() {
+            @Override
+            public void onSuccess(Object response, int statusCode) {
+                if (statusCode == 200) {
+                    SurveyDataResponse model = (SurveyDataResponse) response;
+                    Log.e("TAG", "VoterData Response:" + model.toString());
+                    SurveyStatusModel statusModel = model.getStatus().get(0);
+                    if (statusModel.getSTATUS().equalsIgnoreCase("SUCCESS")) {
+                        int count = surveyDataCount;
+                        count = count + 1;
+                        Log.e("SurveyReqModel", "Listsize="+surveyReqDataModelList.size()+"\t Count:" + count);
+                        if (surveyReqDataModelList.size() == count ) {
+                            showProgress = true;
+                            Utils.getInstance().hideProgressDialog();
+                            Utils.getInstance().showToast(HomeActivity.this, "Voter Survey Data Saved Successfully.");
+                            surveyDataCount = 0;
+                        } else {
+                            showProgress = false;
+                            surveyDataCount = surveyDataCount + 1;
+                            sendSurveyData(surveyReqDataModelList.get(surveyDataCount));
+                        }
+                    } else {
+                        Utils.getInstance().showToast(HomeActivity.this, "Please try again later.");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Object errorResponse) {
+                Utils.getInstance().showToast(HomeActivity.this, "Please try again later.");
+            }
+        });
+
+    }
+
     private void exitFromAPP() {
         DialogUtils.showYesNoLogoutConfirmDialogAndFinishActivity(this, "", getString(R.string.close_the_app));
     }
 
     //Get Voter List
     private void getVoterData() {
-        if(showProgress)
-             Utils.getInstance().showProgressDialog(this);
+        if (showProgress)
+            Utils.getInstance().showProgressDialog(this);
 
-        VoterDataRequestModel requestModel = getVoterDataRequestModel(startID ,endId);
+        VoterDataRequestModel requestModel = getVoterDataRequestModel(startID, endId);
 
         new VoterDataService().getVoterData(this, requestModel, new RESTClientResponse() {
             @Override
@@ -208,27 +263,25 @@ public class HomeActivity extends AppCompatActivity
                         if (result) {
 //
                             int listSize = model.getVoterData().size();
-                            if(listSize < 500){
+                            if (listSize < 500) {
                                 showProgress = true;
                                 Utils.getInstance().hideProgressDialog();
 //                                Utils.getInstance().showToast(HomeActivity.this, "Total "+ (startID + listSize)+" voter data Saved Successfully");
-                               long totalCount = DBHelper.getInstance(HomeActivity.this).getTotalVoterCount();
-                                DialogUtils.showAlertDialog(HomeActivity.this,"Alert","Total "+ totalCount +" voter data Saved Successfully");
-                            }else {
+                                long totalCount = DBHelper.getInstance(HomeActivity.this).getTotalVoterCount();
+                                DialogUtils.showAlertDialog(HomeActivity.this, "Alert", "Total " + totalCount + " voter data Saved Successfully");
+                            } else {
                                 showProgress = false;
-                                if(startID == 0) {//StartID = 0 + 500 + 1 = 501 (First Time)
+                                if (startID == 0) {//StartID = 0 + 500 + 1 = 501 (First Time)
                                     startID = DBHelper.getInstance(HomeActivity.this).getLastInsertedVoterID();
                                     startID = startID + 1; //501
-                                }
-                                else // 501+499 = 1000(from 2 time)
-                                    startID = startID + listSize ;
+                                } else // 501+499 = 1000(from 2 time)
+                                    startID = startID + listSize;
 
-                                endId = startID +499; //1000
+                                endId = startID + 499; //1000
 
                                 getVoterData();
                             }
-                        }
-                        else
+                        } else
                             Utils.getInstance().showToast(HomeActivity.this, "Something went wrong, please try again.");
                     } else {
                         Utils.getInstance().showToast(HomeActivity.this, "Please try again later.");
@@ -296,8 +349,8 @@ public class HomeActivity extends AppCompatActivity
         model.setLoksabhaId(mUserData.getLoksabhaId());
         model.setWardNumber(mUserData.getWardNumber());
         model.setUserID(mUserData.getUserId());
-        model.setStartID(""+start);
-        model.setEndID(""+end);
+        model.setStartID("" + start);
+        model.setEndID("" + end);
         Log.e("TAG", "RequestModel:" + model.toString());
         return model;
     }
@@ -315,6 +368,7 @@ public class HomeActivity extends AppCompatActivity
     public UserData getUserData() {
         return mUserData;
     }
+
     public void showYesNoDialog(final Activity mActivity, String title, String msg) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mActivity);
         if (title != null)
@@ -339,9 +393,10 @@ public class HomeActivity extends AppCompatActivity
 
     private void callWebServiceFromMenu(Activity mActivity) {
         int result = DBHelper.getInstance(mActivity).deleteVoterData();
-        Log.e("result","Result: "+result);
+        Log.e("result", "Result: " + result);
         getVoterData();
     }
+
     private void checkPermissionForWrite() {
         // Here, mContext is the current activity
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -361,7 +416,7 @@ public class HomeActivity extends AppCompatActivity
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
-               case MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
+            case MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
