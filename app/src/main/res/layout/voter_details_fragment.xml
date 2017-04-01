@@ -42,6 +42,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
+                    android:singleLine="false"
                     android:text="1" />
 
             </LinearLayout>
@@ -144,9 +145,9 @@
                     style="@style/Voter_Detail_Text_style"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:maxLines="3"
                     android:layout_weight="0.5"
-                    android:text="1" />
+                    android:singleLine="false"
+                    android:text="Rajshree" />
             </LinearLayout>
 
             <!--aadhar  id-->
@@ -218,8 +219,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:textStyle="bold"
-                    android:text="1" />
+                    android:text="1"
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
